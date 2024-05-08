@@ -2,13 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { ReactElement } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
-import {
-  ChartBarIcon,
-  Cog6ToothIcon,
-  HomeIcon,
-  LightBulbIcon,
-  UserIcon
-} from '@heroicons/react/24/solid'
+import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/solid'
 
 import { me } from '@/api/users'
 
@@ -72,7 +66,7 @@ export default function Dashboard(): ReactElement {
                   }`
                 }
               >
-                <UserIcon className="h-5 w-5" />
+                <Cog6ToothIcon className="h-5 w-5" />
                 Settings
               </NavLink>
             </li>
