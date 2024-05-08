@@ -1,4 +1,4 @@
-# Wattson
+# Zapp
 
 ![Continuous Integration](https://github.com/floriandejonckheere/zapp/workflows/Continuous%20Integration/badge.svg)
 
