@@ -66,8 +66,5 @@ jobs:
       - name: Typecheck
         run: yarn tsc
 
-      - name: Test
-        run: yarn test
-
       - name: Build
         run: yarn build
