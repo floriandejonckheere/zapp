@@ -1,9 +1,6 @@
 # Entity Relationship Diagram
 
 ```mermaid
----
-title: Order example
----
 erDiagram
     users {
         uuid id
