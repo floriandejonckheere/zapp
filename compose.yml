@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/:cached
+    depends_on:
+      - postgres
+    env_file:
+      - .development.env
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres:
