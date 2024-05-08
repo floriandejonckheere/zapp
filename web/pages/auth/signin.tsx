@@ -13,7 +13,7 @@ import { signin } from '../../api/auth'
 export default function Signin(): ReactElement {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [, setToken] = useLocalStorage('token', null)
+  const [, setAccessToken] = useLocalStorage('accessToken', null)
 
   const mutation = useMutation({
     mutationFn: (event: Event) => {
@@ -21,10 +21,10 @@ export default function Signin(): ReactElement {
       return signin(username, password)
     },
     onSuccess: (data) => {
-      setToken(data.access_token)
+      setAccessToken(data.access)
     },
     onError: () => {
-      setToken(null)
+      setAccessToken(null)
     }
   })
 

@@ -11,7 +11,7 @@ import Signup from './pages/auth/signup'
 import { HSStaticMethods } from 'preline'
 
 export default function App(): ReactElement {
-  const [token] = useLocalStorage('token', null)
+  const [accessToken] = useLocalStorage('accessToken', null)
   const location = useLocation()
 
   useEffect(() => {
@@ -26,14 +26,16 @@ export default function App(): ReactElement {
     <Routes>
       <Route path="/" element={<Navigate to="/overview" />} />
 
-      <Route element={<Authentication render={!token} path="/overview" />}>
+      <Route
+        element={<Authentication render={!accessToken} path="/overview" />}
+      >
         <Route element={<Auth />}>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Route>
       </Route>
 
-      <Route element={<Authentication render={!!token} path="/signin" />}>
+      <Route element={<Authentication render={!!accessToken} path="/signin" />}>
         <Route path="/overview" element={<div>Hello, world!</div>} />
       </Route>
     </Routes>

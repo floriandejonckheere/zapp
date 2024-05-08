@@ -3,7 +3,7 @@ import axios from 'axios'
 export function signin(username: string, password: string) {
   return axios
     .post(
-      `/api/users/token`,
+      `/api/users/token/`,
       new URLSearchParams({
         username,
         password,

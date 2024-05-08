@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
     // @ts-expect-error - axios error type is not compatible with react-query
     onError: (error: AxiosError) => {
       if (error.response?.status === 401) {
-        localStorage.removeItem('token')
+        localStorage.removeItem('accessToken')
         window.location.href = '/signin'
       }
     }
