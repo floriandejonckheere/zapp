@@ -61,23 +61,6 @@ export default function Dashboard(): ReactElement {
                 Overview
               </NavLink>
             </li>
-            {isSuccess && data.is_superuser && (
-              <li>
-                <NavLink
-                  to="/administration"
-                  className={({ isActive }) =>
-                    `w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600 ${
-                      isActive
-                        ? 'bg-sky-900 dark:bg-sky-950'
-                        : 'hover:bg-sky-950 hover:text-white-300'
-                    }`
-                  }
-                >
-                  <Cog6ToothIcon className="h-5 w-5" />
-                  Administration
-                </NavLink>
-              </li>
-            )}
             <li className="w-full mt-auto">
               <NavLink
                 to="/settings"
@@ -100,7 +83,7 @@ export default function Dashboard(): ReactElement {
       <div className="p-10 w-full overflow-y-scroll">
         <h1 className="text-3xl font-bold mb-10 dark:text-slate-300">
           Good {moment}
-          {isSuccess && ', ' + data.username}!
+          {isSuccess && ', ' + data.firstName}!
         </h1>
 
         <Outlet />
