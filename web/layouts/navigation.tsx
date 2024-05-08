@@ -5,9 +5,9 @@ import { Link, Outlet } from 'react-router-dom'
 
 import { BoltIcon } from '@heroicons/react/24/solid'
 
-import { me } from '../api/users'
+import { me } from '@/api/users'
 
-import DarkModeToggle from '../components/dark_mode_toggle'
+import DarkModeToggle from '@/components/dark_mode_toggle'
 
 export default function Navigation(): ReactElement {
   const { isSuccess, data } = useQuery({

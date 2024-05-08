@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 
-import { useTheme } from '../contexts/theme'
+import { useTheme } from '@/contexts/theme'
 
 export default function DarkModeToggle(): ReactElement {
   const { darkMode, toggleDarkMode } = useTheme()

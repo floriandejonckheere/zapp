@@ -6,9 +6,9 @@ import axios from 'axios'
 
 import { BoltIcon } from '@heroicons/react/24/solid'
 
-import Spinner from '../../components/spinner'
+import Spinner from '@/components/spinner'
 
-import { signin } from '../../api/auth'
+import { signin } from '@/api/auth'
 
 export default function Signin(): ReactElement {
   const [username, setUsername] = useState('')

@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { useQuery } from '@tanstack/react-query'
 
-import { me } from '../api/users'
+import { me } from '@/api/users'
 
 export default function Settings(): ReactElement {
   const { data } = useQuery({

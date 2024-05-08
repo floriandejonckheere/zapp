@@ -10,7 +10,7 @@ import {
   UserIcon
 } from '@heroicons/react/24/solid'
 
-import { me } from '../api/users'
+import { me } from '@/api/users'
 
 export default function Dashboard(): ReactElement {
   const { isSuccess, data } = useQuery({

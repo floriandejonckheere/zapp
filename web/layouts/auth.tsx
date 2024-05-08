@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import DarkModeToggle from '../components/dark_mode_toggle'
+import DarkModeToggle from '@/components/dark_mode_toggle'
 
 export default function Auth(): ReactElement {
   return (

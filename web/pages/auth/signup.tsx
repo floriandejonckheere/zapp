@@ -5,9 +5,9 @@ import axios from 'axios'
 
 import { BoltIcon } from '@heroicons/react/24/solid'
 
-import Spinner from '../../components/spinner'
+import Spinner from '@/components/spinner'
 
-import { signup } from '../../api/auth'
+import { signup } from '@/api/auth'
 
 export default function Signup(): ReactElement {
   const [email, setEmail] = useState('')
