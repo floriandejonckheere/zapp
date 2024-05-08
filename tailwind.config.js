@@ -1,7 +1,7 @@
 module.exports = {
   content: [
     './dist/**/*.html',
-    './src/**/*.{js,jsx,ts,tsx}',
+    './web/**/*.{js,jsx,ts,tsx}',
     './*.html',
     'node_modules/preline/dist/*.js'
   ],
