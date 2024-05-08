@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
-import { Token } from '@/types'
+import { Token, User } from '@/types'
 
 export function signin(username: string, password: string) {
   return axios
@@ -18,6 +18,26 @@ export function signin(username: string, password: string) {
       }
     )
     .then((response): Token => {
+      return response.data
+    })
+}
+
+export function signout() {
+  const token = localStorage.getItem('accessToken')
+
+  if (!token) {
+    throw new AxiosError('Unauthorized')
+  }
+
+  return axios
+    .delete(`/api/token/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    })
+    .then((response) => {
       return response.data
     })
 }
