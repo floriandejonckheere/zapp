@@ -3,18 +3,14 @@ import axios from 'axios'
 export function signin(username: string, password: string) {
   return axios
     .post(
-      `/api/users/token/`,
+      `/api/token/`,
       new URLSearchParams({
         username,
-        password,
-        grant_type: '',
-        scope: '',
-        client_id: '',
-        client_secret: ''
+        password
       }),
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           Accept: 'application/json'
         }
       }
@@ -27,7 +23,7 @@ export function signin(username: string, password: string) {
 export function signup(email: string, username: string, password: string) {
   return axios
     .post(
-      `/api/users/register`,
+      `/api/users/`,
       new URLSearchParams({
         email,
         username,
@@ -35,7 +31,7 @@ export function signup(email: string, username: string, password: string) {
       }),
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           Accept: 'application/json'
         }
       }
