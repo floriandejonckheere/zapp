@@ -1,7 +1,17 @@
 import { ReactElement, useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useLocalStorage } from '@uidotdev/usehooks'
+
+import Authentication from './authentication'
+
+import Auth from './layouts/auth'
+
+import Signin from './pages/auth/signin'
+import Signup from './pages/auth/signup'
+import { HSStaticMethods } from 'preline'
 
 export default function App(): ReactElement {
+  const [token] = useLocalStorage('token', null)
   const location = useLocation()
 
   useEffect(() => {
@@ -9,13 +19,23 @@ export default function App(): ReactElement {
   }, [])
 
   useEffect(() => {
-    // @ts-expect-error - copied from preline's framework guide
     HSStaticMethods.autoInit()
   }, [location.pathname])
 
   return (
     <Routes>
-      <Route path="/" element={<div>Hello, world!</div>} />
+      <Route path="/" element={<Navigate to="/overview" />} />
+
+      <Route element={<Authentication render={!token} path="/overview" />}>
+        <Route element={<Auth />}>
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+        </Route>
+      </Route>
+
+      <Route element={<Authentication render={!!token} path="/signin" />}>
+        <Route path="/overview" element={<div>Hello, world!</div>} />
+      </Route>
     </Routes>
   )
 }
