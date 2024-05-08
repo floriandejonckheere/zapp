@@ -1,5 +1,7 @@
 import axios, { AxiosError } from 'axios'
 
+import { User } from '@/types'
+
 export function me() {
   const token = localStorage.getItem('accessToken')
 
@@ -15,7 +17,7 @@ export function me() {
         Authorization: `Bearer ${JSON.parse(token)}`
       }
     })
-    .then((response) => {
+    .then((response): User => {
       return response.data
     })
 }
