@@ -14,6 +14,7 @@ export default function Signin(): ReactElement {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [, setAccessToken] = useLocalStorage('accessToken', null)
+  const [, setRefreshToken] = useLocalStorage('refreshToken', null)
 
   const mutation = useMutation({
     mutationFn: (event: Event) => {
@@ -22,9 +23,11 @@ export default function Signin(): ReactElement {
     },
     onSuccess: (data) => {
       setAccessToken(data.access)
+      setRefreshToken(data.refresh)
     },
     onError: () => {
       setAccessToken(null)
+      setRefreshToken(null)
     }
   })
 
