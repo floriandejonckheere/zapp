@@ -6,7 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from app.users.serializers import GroupSerializer, CreateUserSerializer, UserSerializer
+from app.users.serializers import GroupSerializer, UserSerializer, CreateUserSerializer, UpdateUserSerializer, UpdatePasswordSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -16,15 +16,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     create_serializer_class = CreateUserSerializer
+    update_serializer_class = UpdateUserSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-    def get_serializer_class(self):
-        serializer_class = self.serializer_class
-
-        if self.request.method == 'POST':
-            serializer_class = self.create_serializer_class
-
-        return serializer_class
 
     def get_permissions(self):
         if self.action == 'create':
@@ -34,19 +27,32 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], url_path='me', url_name='me')
     def me(self, request):
-        serializer = self.get_serializer(request.user)
+        serializer = UserSerializer(request.user)
 
         return Response(serializer.data)
 
-    # @action(detail=False, methods=['post'])
-    def create(self, request):
-        serializer = self.get_serializer(data=request.data)
+    def create(self, request, *args, **kwargs):
+        serializer = CreateUserSerializer(data=request.data)
+
         if serializer.is_valid():
             self.perform_create(serializer)
         else:
             return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        if 'password' in request.data:
+            serializer = UpdatePasswordSerializer(instance=self.get_object(), data={'password': request.data['password']})
+        else:
+            serializer = UpdateUserSerializer(instance=self.get_object(), data=request.data)
+
+        if serializer.is_valid():
+            self.perform_update(serializer)
+        else:
+            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.data)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

@@ -1,12 +1,47 @@
-import { ReactElement } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { ReactElement, useEffect, useState } from 'react'
+import Spinner from '../components/spinner'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 
-import { me } from '@/api/users'
+import { updateUser, updatePassword, me } from '@/api/users'
 
 export default function Settings(): ReactElement {
+  const [id, setId] = useState<number>(0)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [password, setPassword] = useState('')
+
   const { data } = useQuery({
     queryKey: ['me'],
     queryFn: me
+  })
+
+  useEffect(() => {
+    if (data) {
+      setId(data.id)
+      setFirstName(data.firstName)
+      setLastName(data.lastName)
+    }
+  })
+
+  const updateUserMutation = useMutation({
+    mutationFn: (event: Event) => {
+      event.preventDefault()
+      return updateUser(id, firstName, lastName)
+    },
+    onSuccess: () => {
+      window.location.href = '/overview'
+    }
+  })
+
+  const updatePasswordMutation = useMutation({
+    mutationFn: (event: Event) => {
+      event.preventDefault()
+      return updatePassword(id, password)
+    },
+    onSuccess: () => {
+      window.location.href = '/overview'
+    }
   })
 
   return (
@@ -17,39 +52,127 @@ export default function Settings(): ReactElement {
         <div className="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
           <div className="mb-8">
             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
-              Role and permissions
+              Account
             </h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Update your account role and permissions
+              Update your account details
             </p>
           </div>
-          <div className="flex flex-row items-center justify-between">
-            <span className="block text-sm mb-2 dark:text-white">
-              Administrator
-            </span>
-            <div className="hs-tooltip hs-tooltip-toggle">
-              <input
-                type="checkbox"
-                id="hs-basic-usage"
-                className="relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none checked:bg-none checked:text-sky-700 checked:border-sky-700 focus:checked:border-sky-700 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-sky-900 dark:checked:border-sky-900 dark:focus:ring-offset-gray-600 before:inline-block before:w-6 before:h-6 before:bg-white checked:before:bg-sky-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-sky-200"
-                disabled={!data?.is_superuser}
-                checked={data?.is_superuser}
-              />
 
-              {data?.is_superuser || (
-                <span
-                  className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-white text-sm"
-                  role="tooltip"
-                >
-                  Role can only be changed if you're an administrator
-                </span>
+          {/* @ts-expect-error - mutation is not a real form handler */}
+          <form onSubmit={updateUserMutation.mutate}>
+            <div className="grid gap-y-4">
+              {updateUserMutation.isError && (
+                <p className="text-sm text-red-600 font-bold">
+                  Error:{' '}
+                  {axios.isAxiosError(updateUserMutation.error)
+                    ? updateUserMutation.error.response?.data.detail
+                    : updateUserMutation.error.message}
+                </p>
               )}
-            </div>
 
-            <label htmlFor="hs-basic-usage" className="sr-only">
-              switch
-            </label>
+              <div>
+                <label
+                  htmlFor="first_name"
+                  className="block text-sm mb-2 dark:text-white"
+                >
+                  First name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-sky-700 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  required
+                  defaultValue={data?.firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="last_name"
+                  className="block text-sm mb-2 dark:text-white"
+                >
+                  Last name
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-sky-700 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  defaultValue={data?.lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-sky-700 text-white hover:bg-sky-900 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                disabled={updateUserMutation.isPending}
+              >
+                {updateUserMutation.isPending ? (
+                  <Spinner color="text-white" />
+                ) : (
+                  'Update'
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
+          <div className="mb-8">
+            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
+              Password
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Update your account password
+            </p>
           </div>
+
+          {/* @ts-expect-error - mutation is not a real form handler */}
+          <form onSubmit={updatePasswordMutation.mutate}>
+            <div className="grid gap-y-4">
+              {updatePasswordMutation.isError && (
+                <p className="text-sm text-red-600 font-bold">
+                  Error:{' '}
+                  {axios.isAxiosError(updatePasswordMutation.error)
+                    ? updatePasswordMutation.error.response?.data.detail
+                    : updatePasswordMutation.error.message}
+                </p>
+              )}
+
+              <div>
+                <label
+                  htmlFor="new_password"
+                  className="block text-sm mb-2 dark:text-white"
+                >
+                  New password
+                </label>
+                <input
+                  type="password"
+                  id="new_password"
+                  name="new_password"
+                  className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-sky-700 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                  required
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full mt-4 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-sky-700 text-white hover:bg-sky-900 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                disabled={updatePasswordMutation.isPending}
+              >
+                {updatePasswordMutation.isPending ? (
+                  <Spinner color="text-white" />
+                ) : (
+                  'Update'
+                )}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </>

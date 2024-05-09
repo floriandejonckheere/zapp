@@ -22,7 +22,7 @@ from rest_framework_simplejwt import views as jwt_views
 from app.users import views as users_views
 
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter(trailing_slash=False)
 router.register(r'users', users_views.UserViewSet)
 router.register(r'groups', users_views.GroupViewSet)
 

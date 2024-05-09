@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 
-import { Token, User } from '@/types'
+import { Token } from '@/types'
 
 export function signin(username: string, password: string) {
   return axios
