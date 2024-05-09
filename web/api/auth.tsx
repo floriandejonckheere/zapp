@@ -42,14 +42,22 @@ export function signout() {
     })
 }
 
-export function signup(email: string, username: string, password: string) {
+export function signup(
+  email: string,
+  username: string,
+  password: string,
+  firstName: string,
+  lastName: string
+) {
   return axios
     .post(
       `/api/users/`,
       {
         email,
         username,
-        password
+        password,
+        firstName,
+        lastName
       },
       {
         headers: {

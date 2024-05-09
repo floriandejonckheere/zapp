@@ -13,11 +13,13 @@ export default function Signup(): ReactElement {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
 
   const mutation = useMutation({
     mutationFn: (event: Event) => {
       event.preventDefault()
-      return signup(email, username, password)
+      return signup(email, username, password, firstName, lastName)
     },
     onSuccess: () => {
       window.location.href = '/signin'
@@ -60,7 +62,7 @@ export default function Signup(): ReactElement {
                 htmlFor="email"
                 className="block text-sm mb-2 dark:text-white"
               >
-                Email
+                Email <span className="text-red-600">*</span>
               </label>
               <input
                 type="email"
@@ -77,7 +79,7 @@ export default function Signup(): ReactElement {
                 htmlFor="username"
                 className="block text-sm mb-2 dark:text-white"
               >
-                Username
+                Username <span className="text-red-600">*</span>
               </label>
               <input
                 type="text"
@@ -91,10 +93,43 @@ export default function Signup(): ReactElement {
 
             <div>
               <label
+                htmlFor="first_name"
+                className="block text-sm mb-2 dark:text-white"
+              >
+                First name <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-sky-700 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                required
+                onChange={(event) => setFirstName(event.target.value)}
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="last_name"
+                className="block text-sm mb-2 dark:text-white"
+              >
+                Last name
+              </label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-sky-700 focus:ring-sky-700 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                onChange={(event) => setLastName(event.target.value)}
+              />
+            </div>
+
+            <div>
+              <label
                 htmlFor="password"
                 className="block text-sm mb-2 dark:text-white"
               >
-                Password
+                Password <span className="text-red-600">*</span>
               </label>
               <input
                 type="password"
