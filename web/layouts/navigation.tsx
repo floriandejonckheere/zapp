@@ -45,7 +45,7 @@ export default function Navigation(): ReactElement {
               className="inline-flex items-center gap-x-6 text-3xl font-bold dark:text-slate-200 dark:hover:text-slate-100"
             >
               <BoltIcon className="h-12 w-12 p-2.5 bg-sky-700 text-white rounded-full" />
-              Wattson
+              Zapp
             </Link>
           </div>
           <div
