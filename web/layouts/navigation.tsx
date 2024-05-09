@@ -63,7 +63,9 @@ export default function Navigation(): ReactElement {
                       {data.firstName.charAt(0).toUpperCase()}
                     </span>
                     <div className="flex flex-col">
-                      <span>{data.firstName}</span>
+                      <span>
+                        {data.firstName} {data.lastName}
+                      </span>
                       <span className="text-gray-400 dark:text-slate-500">
                         {data.email}
                       </span>

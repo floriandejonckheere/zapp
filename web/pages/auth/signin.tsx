@@ -13,8 +13,8 @@ import { signin } from '@/api/auth'
 export default function Signin(): ReactElement {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [, setAccessToken] = useLocalStorage('accessToken', null)
-  const [, setRefreshToken] = useLocalStorage('refreshToken', null)
+  const [, setAccessToken] = useLocalStorage('accessToken')
+  const [, setRefreshToken] = useLocalStorage('refreshToken')
 
   const mutation = useMutation({
     mutationFn: (event: Event) => {
