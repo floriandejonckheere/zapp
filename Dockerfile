@@ -62,6 +62,9 @@ RUN yarn install
 # Add web application
 ADD . $APP_HOME/
 
+# Install correct Yarn version
+RUN corepack enable && corepack prepare yarn@stable --activate && yarn set version 4.0.2 && yarn install
+
 # Build web application
 RUN yarn build
 
