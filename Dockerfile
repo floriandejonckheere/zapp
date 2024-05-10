@@ -51,11 +51,12 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME/
 
 # Install correct Yarn version
-RUN corepack enable && corepack prepare yarn@stable --activate && yarn set version 4.0.2 && yarn install
+RUN corepack enable && corepack prepare yarn@stable --activate && yarn set version 4.2.2 && yarn install
 
 # Install NPM dependencies
 ADD package.json $APP_HOME/
 ADD yarn.lock $APP_HOME/
+ADD .yarnrc.yml $APP_HOME/
 
 RUN yarn install
 
