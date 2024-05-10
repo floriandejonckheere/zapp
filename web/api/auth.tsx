@@ -51,7 +51,7 @@ export function signup(
 ) {
   return axios
     .post(
-      `/api/users/`,
+      `/api/users`,
       {
         email,
         username,
