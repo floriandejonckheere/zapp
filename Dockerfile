@@ -66,7 +66,7 @@ ADD . $APP_HOME/
 RUN yarn build
 
 # Frontend production stage
-FROM nginx as web
+FROM nginx AS web
 
 COPY --from=node /app/dist /usr/share/nginx/html
 
