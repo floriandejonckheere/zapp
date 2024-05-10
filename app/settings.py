@@ -86,11 +86,11 @@ CORS_ORIGIN_ALLOW_ALL = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME') or 'zapp_development',
-        'USER': os.environ.get('POSTGRES_USER') or 'postgres',
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD') or 'postgres',
-        'HOST': os.environ.get('POSTGRES_HOST') or 'postgres',
-        'PORT': os.environ.get('POSTGRES_PORT') or 5432,
+        'NAME': os.environ.get('PG_DATABASE') or 'zapp_development',
+        'USER': os.environ.get('PG_USER') or 'postgres',
+        'PASSWORD': os.environ.get('PG_PASSWORD') or 'postgres',
+        'HOST': os.environ.get('PG_HOST') or 'postgres',
+        'PORT': os.environ.get('PG_PORT') or 5432,
     }
 }
 
