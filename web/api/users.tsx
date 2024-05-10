@@ -74,3 +74,22 @@ export function updatePassword(id: number, password: string) {
       return response.data
     })
 }
+
+export function deleteUser(id: number) {
+  const token = localStorage.getItem('accessToken')
+
+  if (!token) {
+    throw new AxiosError('Unauthorized')
+  }
+
+  return axios
+    .delete(`/api/users/${id}`, {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    })
+    .then((response) => {
+      return response.data
+    })
+}
