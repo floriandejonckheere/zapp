@@ -10,7 +10,9 @@ services:
       - "5432:5432"
 
   app:
-    build: .
+    build:
+      context: .
+      target: app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app/:cached
@@ -21,6 +23,15 @@ services:
       - .development.env
     ports:
       - "8000:8000"
+
+  web:
+    build:
+      context: .
+      target: web
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
 
 volumes:
   pip:
