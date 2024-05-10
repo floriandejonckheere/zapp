@@ -1,11 +1,4 @@
-interface SpinnerProps {
-  color: string
-  size: string
-}
-
-export default function Spinner(props: SpinnerProps) {
-  const { color, size } = props
-
+export default function Spinner({ color = 'text-sky-700', size = '5' }) {
   return (
     <span
       className={`animate-spin inline-block w-${size} h-${size} border-[3px] border-current border-t-transparent rounded-full ${color}`}
@@ -15,9 +8,4 @@ export default function Spinner(props: SpinnerProps) {
       <span className="sr-only">Loading...</span>
     </span>
   )
-}
-
-Spinner.defaultProps = {
-  color: 'text-sky-700',
-  size: '5'
 }
