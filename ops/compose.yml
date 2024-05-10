@@ -7,12 +7,6 @@ x-app: &app
     PG_USER: ${PG_USER}
     PG_PASSWORD: ${PG_PASSWORD}
     PG_DATABASE: ${PG_DATABASE}
-  logging:
-    driver: "json-file"
-    options:
-      max-file: "1"
-      max-size: "128m"
-      compress: "true"
   restart: unless-stopped
 
 services:
@@ -28,12 +22,6 @@ services:
     image: ghcr.io/floriandejonckheere/zapp/web:latest
     networks:
       - fcloud
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "1"
-        max-size: "128m"
-        compress: "true"
     restart: unless-stopped
     labels:
       traefik.enable: "true"
