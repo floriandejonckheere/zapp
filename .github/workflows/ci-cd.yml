@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-22.04
     environment:
       name: production
-      url: https://zap.dejonckhee.re
+      url: https://zapp.dejonckhee.re
     needs:
         - build-app
 
