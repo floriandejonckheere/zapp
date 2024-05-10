@@ -138,3 +138,47 @@ jobs:
           target: web
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/web:latest
+
+  deploy-app:
+    name: Continuous Deployment (app)
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-22.04
+    needs:
+        - build-app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USER }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Set up docker context
+        uses: amirmarmul/docker-context-ssh-action@v2
+        with:
+          ssh-host: ${{ secrets.SSH_HOST }}
+          ssh-username: ${{ secrets.SSH_USER }}
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          context-name: cloud
+          context-use: true
+
+      - name: Set environment
+        run: |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+          echo "PG_USER=${{ secrets.PG_USER }}" >> $GITHUB_ENV
+          echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" >> $GITHUB_ENV
+          echo "PG_DATABASE=${{ secrets.PG_DATABASE }}" >> $GITHUB_ENV
+      - name: Deploy application
+        env:
+          GHCR_USER: ${{ secrets.GHCR_TOKEN }}
+          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          COMPOSE_PROJECT_NAME: ${{ github.event.repository.name }}
+        run: |
+          cd ops
+          docker-compose pull
+          docker-compose up migration
+          docker-compose up --detach app
