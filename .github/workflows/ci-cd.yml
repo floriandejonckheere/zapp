@@ -140,7 +140,7 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/web:latest
 
   deploy-app:
-    name: Continuous Deployment (app)
+    name: Continuous Deployment
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-22.04
     environment:
@@ -148,6 +148,7 @@ jobs:
       url: https://zapp.dejonckhee.re
     needs:
         - build-app
+        - build-web
 
     steps:
       - uses: actions/checkout@v4
