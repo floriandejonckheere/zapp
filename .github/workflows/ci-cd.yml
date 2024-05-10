@@ -179,6 +179,6 @@ jobs:
           COMPOSE_PROJECT_NAME: ${{ github.event.repository.name }}
         run: |
           cd ops
-          docker-compose pull
-          docker-compose up migration
-          docker-compose up --detach app
+          docker compose pull
+          docker compose up migration
+          docker compose up --detach app
