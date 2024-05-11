@@ -16,3 +16,9 @@ export interface Group {
   id: number
   name: string
 }
+
+export interface Home {
+  id: number
+  name: string
+  address: string
+}

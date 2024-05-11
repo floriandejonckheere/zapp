@@ -6,7 +6,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from app.users.serializers import GroupSerializer, UserSerializer, CreateUserSerializer, UpdateUserSerializer, UpdatePasswordSerializer
+from .serializers import GroupSerializer, UserSerializer, CreateUserSerializer, UpdateUserSerializer, \
+    UpdatePasswordSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,20 +38,23 @@ class UserViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             self.perform_create(serializer)
         else:
-            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, *args, **kwargs):
         if 'password' in request.data:
-            serializer = UpdatePasswordSerializer(instance=self.get_object(), data={'password': request.data['password']})
+            serializer = UpdatePasswordSerializer(instance=self.get_object(),
+                                                  data={'password': request.data['password']})
         else:
             serializer = UpdateUserSerializer(instance=self.get_object(), data=request.data)
 
         if serializer.is_valid():
             self.perform_update(serializer)
         else:
-            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.data)
 
