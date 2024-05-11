@@ -1,10 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react'
 import Spinner from '../components/spinner'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useLocalStorage } from '@uidotdev/usehooks'
 
-import { updateUser, updatePassword, deleteUser, me } from '@/api/users'
+import { deleteUser, me, updatePassword, updateUser } from '@/api/users'
 
 export default function Settings(): ReactElement {
   const [id, setId] = useState<number>(0)

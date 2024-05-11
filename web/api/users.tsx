@@ -1,20 +1,13 @@
-import axios, { AxiosError } from 'axios'
+import { client } from '@/client'
 
 import { User } from '@/types'
 
 export function me() {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .get(`/api/users/me`, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${JSON.parse(token)}`
+        Accept: 'application/json'
       }
     })
     .then((response): User => {
@@ -23,13 +16,7 @@ export function me() {
 }
 
 export function updateUser(id: number, firstName: string, lastName: string) {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .patch(
       `/api/users/${id}`,
       {
@@ -39,8 +26,7 @@ export function updateUser(id: number, firstName: string, lastName: string) {
       {
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${JSON.parse(token)}`
+          Accept: 'application/json'
         }
       }
     )
@@ -50,13 +36,7 @@ export function updateUser(id: number, firstName: string, lastName: string) {
 }
 
 export function updatePassword(id: number, password: string) {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .patch(
       `/api/users/${id}`,
       {
@@ -65,8 +45,7 @@ export function updatePassword(id: number, password: string) {
       {
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${JSON.parse(token)}`
+          Accept: 'application/json'
         }
       }
     )
@@ -76,17 +55,10 @@ export function updatePassword(id: number, password: string) {
 }
 
 export function deleteUser(id: number) {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .delete(`/api/users/${id}`, {
       headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${JSON.parse(token)}`
+        Accept: 'application/json'
       }
     })
     .then((response) => {

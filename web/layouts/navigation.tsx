@@ -1,15 +1,13 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useLocalStorage } from '@uidotdev/usehooks'
+import { useQuery } from '@tanstack/react-query'
 import { ReactElement } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 import { BoltIcon } from '@heroicons/react/24/solid'
 
 import { me } from '@/api/users'
-import { signout } from '@/api/auth'
 
 import DarkModeToggle from '@/components/dark_mode_toggle'
-import Spinner from '@/components/spinner'
 
 export default function Navigation(): ReactElement {
   const { isSuccess, data } = useQuery({
@@ -20,20 +18,10 @@ export default function Navigation(): ReactElement {
   const [, setAccessToken] = useLocalStorage('accessToken', null)
   const [, setRefreshToken] = useLocalStorage('refreshToken', null)
 
-  const mutation = useMutation({
-    mutationFn: (event: Event) => {
-      event.preventDefault()
-      return signout()
-    },
-    onSuccess: () => {
-      setAccessToken(null)
-      setRefreshToken(null)
-    },
-    onError: () => {
-      setAccessToken(null)
-      setRefreshToken(null)
-    }
-  })
+  const handleSignout = () => {
+    setAccessToken(null)
+    setRefreshToken(null)
+  }
 
   return (
     <div className="flex flex-col w-full h-full">
@@ -75,20 +63,12 @@ export default function Navigation(): ReactElement {
               )}
               <DarkModeToggle />
 
-              {/* @ts-expect-error - mutation is not a real form handler */}
-              <form onSubmit={mutation.mutate}>
-                <button
-                  type="submit"
-                  className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-sky-700 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-slate-300 dark:hover:text-blue-500"
-                  disabled={mutation.isPending}
-                >
-                  {mutation.isPending ? (
-                    <Spinner color="text-white" />
-                  ) : (
-                    'Sign out'
-                  )}
-                </button>
-              </form>
+              <button
+                onClick={handleSignout}
+                className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-sky-700 sm:border-s sm:border-gray-300 sm:my-6 sm:ps-6 dark:border-gray-700 dark:text-slate-300 dark:hover:text-blue-500"
+              >
+                Sign out
+              </button>
             </div>
           </div>
         </nav>
