@@ -1,9 +1,8 @@
-import axios, { AxiosError } from 'axios'
-
+import { client } from '@/client'
 import { Token } from '@/types'
 
 export function signin(username: string, password: string) {
-  return axios
+  return client
     .post(
       `/api/token/`,
       {
@@ -23,18 +22,11 @@ export function signin(username: string, password: string) {
 }
 
 export function signout() {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .delete(`/api/token/`, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${JSON.parse(token)}`
+        Accept: 'application/json'
       }
     })
     .then((response) => {
@@ -49,7 +41,7 @@ export function signup(
   firstName: string,
   lastName: string
 ) {
-  return axios
+  return client
     .post(
       `/api/users`,
       {

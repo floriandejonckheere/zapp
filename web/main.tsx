@@ -1,11 +1,6 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider
-} from '@tanstack/react-query'
-import { AxiosError } from 'axios'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // @ts-expect-error - including @types/react-dom gives a lot of errors
 import { createRoot } from 'react-dom/client'
 
@@ -24,17 +19,7 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       retry: false
     }
-  },
-  queryCache: new QueryCache({
-    // @ts-expect-error - axios error type is not compatible with react-query
-    onError: (error: AxiosError) => {
-      if (error.response?.status === 401) {
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('refreshToken')
-        window.location.href = '/signin'
-      }
-    }
-  })
+  }
 })
 
 const Main = () => {

@@ -1,20 +1,17 @@
 import { ReactElement, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { useLocalStorage } from '@uidotdev/usehooks'
 import axios from 'axios'
 
 import { BoltIcon } from '@heroicons/react/24/solid'
-
 import Spinner from '@/components/spinner'
 
+import { clearTokens, setTokens } from '@/client'
 import { signin } from '@/api/auth'
 
 export default function Signin(): ReactElement {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [, setAccessToken] = useLocalStorage('accessToken')
-  const [, setRefreshToken] = useLocalStorage('refreshToken')
 
   const mutation = useMutation({
     mutationFn: (event: Event) => {
@@ -22,12 +19,10 @@ export default function Signin(): ReactElement {
       return signin(username, password)
     },
     onSuccess: (data) => {
-      setAccessToken(data.access)
-      setRefreshToken(data.refresh)
+      setTokens(data.access, data.refresh)
     },
     onError: () => {
-      setAccessToken(null)
-      setRefreshToken(null)
+      clearTokens()
     }
   })
 
