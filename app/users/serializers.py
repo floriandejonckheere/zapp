@@ -1,24 +1,31 @@
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group, User as DjangoUser
 from rest_framework import serializers
+
+from .models import User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = DjangoUser
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'groups']
 
 
 class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = DjangoUser
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
 
     def create(self, validated_data):
         # Hash the password
         validated_data['password'] = make_password(validated_data['password'])
 
-        return super().create(validated_data)
+        user = super().create(validated_data)
+
+        # Create linked user
+        User.objects.create(user=user)
+
+        return user
 
 
 class UpdateUserSerializer(serializers.HyperlinkedModelSerializer):
