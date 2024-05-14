@@ -3,9 +3,13 @@ import { NavLink } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 
 import { me } from '@/api/users'
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 
-export default function Header(props: { title: string }): ReactElement {
-  const { title } = props
+export default function Header(props: {
+  title: string
+  back?: boolean
+}): ReactElement {
+  const { title, back = false } = props
 
   const { isSuccess, data } = useQuery({
     queryKey: ['me'],
@@ -30,16 +34,23 @@ export default function Header(props: { title: string }): ReactElement {
   }
 
   return (
-    <div className="p-8 flex justify-between items-center">
-      <div className="inline-block flex flex-col gap-2 text-white">
+    <div className="p-8 flex gap-4 text-white items-center">
+      {back && (
+        <NavLink to="/overview">
+          <ArrowLeftIcon className="h-8 w-8" />
+        </NavLink>
+      )}
+
+      <div className="inline-block flex flex-col gap-2">
         <div className="text-sm">
           Good {moment}
           {isSuccess && ', ' + data.firstName}!
         </div>
-        <h1 className="inline-block font-semibold text-white text-2xl">
-          {title}
-        </h1>
+        <h1 className="inline-block font-semibold text-2xl">{title}</h1>
       </div>
+
+      <div className="flex-1" />
+
       {isSuccess && (
         <div className="float-right">
           <NavLink to="/settings" className="">
