@@ -3,10 +3,13 @@ import { ReactElement } from 'react'
 export default function Settings(): ReactElement {
   return (
     <>
-      <h2 className="text-xl font-bold dark:text-slate-300">Settings</h2>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 mt-8 gap-8">
+      <div className="w-full p-6 bg-white rounded-2xl shadow-md">
         Hello, world!
+        <p>This is a paragraph</p>
+        <p>This is a paragraph</p>
+        <p>This is a paragraph</p>
+        <p>This is a paragraph</p>
+        <p>This is a paragraph</p>
       </div>
     </>
   )
