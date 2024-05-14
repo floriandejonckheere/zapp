@@ -50,7 +50,9 @@ export default function App(): ReactElement {
         />
         <Route
           path="/settings"
-          element={<Layout title="Settings" component={<Settings />} />}
+          element={
+            <Layout title="Settings" component={<Settings />} footer={false} />
+          }
         />
       </Route>
     </Routes>
