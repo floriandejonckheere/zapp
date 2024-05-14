@@ -54,7 +54,7 @@ export default function Header(props: {
       {isSuccess && (
         <div className="float-right">
           <NavLink to="/settings" className="">
-            <span className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-yellow-600 font-semibold text-white">
+            <span className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-sky-900 font-semibold text-white">
               {data.firstName.charAt(0).toUpperCase()}
             </span>
           </NavLink>
