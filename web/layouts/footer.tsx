@@ -10,9 +10,7 @@ export default function Footer(): ReactElement {
           to="/overview"
           className={({ isActive }) =>
             `flex flex-row items-center gap-2 px-2 py-3 text-sm rounded-md ${
-              isActive
-                ? 'bg-yellow-400 text-white'
-                : 'bg-transparent text-yellow-400'
+              isActive ? 'bg-sky-700 text-white' : 'bg-transparent text-sky-700'
             }`
           }
         >
@@ -23,9 +21,7 @@ export default function Footer(): ReactElement {
           to="/schedule"
           className={({ isActive }) =>
             `flex flex-row items-center gap-2 px-2 py-3 text-sm rounded-md ${
-              isActive
-                ? 'bg-yellow-400 text-white'
-                : 'bg-transparent text-yellow-400'
+              isActive ? 'bg-sky-700 text-white' : 'bg-transparent text-sky-700'
             }`
           }
         >

@@ -11,7 +11,7 @@ export default function App(props: {
   const { title, component, footer = true } = props
 
   return (
-    <div className="h-full w-full bg-yellow-400">
+    <div className="h-full w-full bg-sky-700">
       <Header title={title} back={!footer} />
 
       {/* White underlay */}
