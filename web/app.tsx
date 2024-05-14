@@ -5,6 +5,7 @@ import { HSStaticMethods } from 'preline'
 
 import Authentication from './authentication'
 
+import AppLayout from './layouts/app'
 import Auth from './layouts/auth'
 import Dashboard from './layouts/dashboard'
 import Navigation from './layouts/navigation'
@@ -14,6 +15,10 @@ import Settings from './pages/settings'
 
 import Signin from './pages/auth/signin'
 import Signup from './pages/auth/signup'
+
+import AppOverview from './pages/app/overview'
+import AppSchedule from './pages/app/schedule'
+import AppSettings from './pages/app/settings'
 
 export default function App(): ReactElement {
   const [accessToken] = useLocalStorage('accessToken', null)
@@ -46,6 +51,12 @@ export default function App(): ReactElement {
             <Route path="/overview" element={<Overview />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
+        </Route>
+
+        <Route element={<AppLayout />}>
+          <Route path="/app/overview" element={<AppOverview />} />
+          <Route path="/app/schedule" element={<AppSchedule />} />
+          <Route path="/app/settings" element={<AppSettings />} />
         </Route>
       </Route>
     </Routes>
