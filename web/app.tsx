@@ -40,11 +40,18 @@ export default function App(): ReactElement {
       </Route>
 
       <Route element={<Authentication render={!!accessToken} path="/signin" />}>
-        <Route element={<Layout />}>
-          <Route path="/overview" element={<Overview />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/settings" element={<Settings />} />
-        </Route>
+        <Route
+          path="/overview"
+          element={<Layout title="Overview" component={<Overview />} />}
+        />
+        <Route
+          path="/schedule"
+          element={<Layout title="Schedule" component={<Schedule />} />}
+        />
+        <Route
+          path="/settings"
+          element={<Layout title="Settings" component={<Settings />} />}
+        />
       </Route>
     </Routes>
   )
