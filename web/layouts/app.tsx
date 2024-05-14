@@ -9,7 +9,13 @@ import {
 export default function App(): ReactElement {
   return (
     <div className="h-full w-full bg-yellow-400 overflow-hidden">
-      <nav className="px-4 py-8 text-white font-bold flex flex-row gap-4 overflow-y-scroll">
+      <h1 className="p-8 font-bold text-white text-3xl">Overview</h1>
+
+      <div className="h-full w-full p-8 bg-white rounded-t-3xl shadow-lg">
+        <Outlet />
+      </div>
+
+      <nav className="w-full h-16 fixedpx-4 py-8 text-white font-bold flex flex-row gap-4 overflow-y-scroll">
         <NavLink
           to="/app/overview"
           className={({ isActive }) =>
@@ -47,10 +53,6 @@ export default function App(): ReactElement {
           <Cog6ToothIcon className="inline-block h-4 w-4" /> Settings
         </NavLink>
       </nav>
-
-      <div className="h-full w-full p-8 bg-white rounded-t-3xl shadow-lg">
-        <Outlet />
-      </div>
     </div>
   )
 }
