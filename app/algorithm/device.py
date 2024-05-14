@@ -19,3 +19,23 @@ class Device:
 
         # Constraints
         self.constraints = constraints
+
+    def validate(self, prediction):
+        # If no constraints are defined, return 1 (i.e. always consuming power)
+        if not any(self.constraints):
+            return 1
+
+        # Calculate the power production/consumption based on the constraints
+        power_in = sum(
+            constraint.validate(prediction) for constraint in self.constraints if constraint.constraint_type == 'in')
+        power_out = sum(
+            constraint.validate(prediction) for constraint in self.constraints if constraint.constraint_type == 'out')
+
+        # Calculate the net power consumption
+        total_power = power_in - power_out
+
+        # Apply the device power (if defined)
+        if self.power:
+            total_power *= self.power
+
+        return total_power

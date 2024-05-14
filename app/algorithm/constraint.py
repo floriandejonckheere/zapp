@@ -16,7 +16,7 @@ class Constraint:
 class TimeConstraint(Constraint):
     def validate(self, prediction):
         # Check if the current time is within the constraint
-        return self.start <= prediction.time.hour <= self.stop
+        return self.start <= prediction.time <= self.stop
 
 
 class CostConstraint(Constraint):

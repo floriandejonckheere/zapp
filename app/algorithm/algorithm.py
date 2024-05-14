@@ -16,6 +16,8 @@ battery = Device(name='Battery', device_type='storage', capacity=15000)
 ev = Device(name='Electric Vehicle', device_type='consumer', power=7200, capacity=40000)
 hvac = Device(name='HVAC', device_type='consumer', power=3000)
 
+devices = (house, grid, solar_panel, battery, ev, hvac)
+
 # Time-based constraints
 ev.constraints = [
     # EV can only charge between 22:00 and 06:00
@@ -83,7 +85,25 @@ def main():
         print(prediction)
 
     # Algorithm step 2: generate smart energy schedule based on predictions
-    # TODO
+    power_yield = []
+    energy_schedule = {device.name: [] for device in devices}
+
+    for i in range(0, 24):
+        # Calculate power yield
+        power_yield.append(predicted_production[i] - predicted_consumption[i])
+
+        # Calculate energy schedule
+        for device in devices:
+            power = device.validate(predictions[i])
+
+            energy_schedule[device.name].append(power)
+
+    # Print yield
+    print(power_yield)
+
+    # Print energy schedules
+    for device, power_schedule in energy_schedule.items():
+        print(f"{device}: {power_schedule}")
 
 
 if __name__ == '__main__':
