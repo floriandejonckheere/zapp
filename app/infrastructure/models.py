@@ -13,14 +13,13 @@ class Home(models.Model):
 
 
 class Device(models.Model):
-    class Category(models.TextChoices):
-        SOLAR_PANEL = "SP", _("Solar panel")
-        BATTERY = "BA", _("Battery")
-        ELECTRIC_VEHICLE = "EV", _("Electric vehicle")
-        HEAT_PUMP = "HP", _("Heat pump")
-        OTHER = "OT", _("Other")
+    class DeviceType(models.TextChoices):
+        CONSUMER = "CO", _("Consumer")
+        PRODUCER = "PR", _("Producer")
+        STORAGE = "ST", _("Storage")
+        GRID = "GR", _("Grid")
 
     id = models.AutoField(primary_key=True)
     home = models.ForeignKey('Home', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    category = models.CharField(max_length=200, choices=Category.choices, default=Category.OTHER)
+    device_type = models.CharField(max_length=2, choices=DeviceType.choices, default=DeviceType.CONSUMER)
