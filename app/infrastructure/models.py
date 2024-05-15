@@ -19,7 +19,20 @@ class Device(models.Model):
         STORAGE = "ST", _("Storage")
         GRID = "GR", _("Grid")
 
+    # Primary key
     id = models.AutoField(primary_key=True)
+
+    # Home
     home = models.ForeignKey('Home', on_delete=models.CASCADE)
+
+    # Name
     name = models.CharField(max_length=200)
+
+    # Type (consumer, producer, storage, or grid)
     device_type = models.CharField(max_length=2, choices=DeviceType.choices, default=DeviceType.CONSUMER)
+
+    # Power (W)
+    power = models.IntegerField(null=True)
+
+    # Capacity (Wh)
+    capacity = models.IntegerField(null=True)
