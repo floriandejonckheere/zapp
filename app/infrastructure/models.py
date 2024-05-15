@@ -4,13 +4,24 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Home(models.Model):
+    # Primary key
     id = models.AutoField(primary_key=True)
+
+    # Name
     name = models.CharField(max_length=200)
+
+    # Address
     address = models.CharField(max_length=200)
+
+    # Users
     users = models.ManyToManyField('users.User')
 
+    # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Device(models.Model):
@@ -33,16 +44,17 @@ class Device(models.Model):
     device_type = models.CharField(max_length=2, choices=DeviceType.choices, default=DeviceType.CONSUMER)
 
     # Power (W)
-    power = models.IntegerField(null=True)
+    power = models.IntegerField(null=True, blank=True)
 
     # Capacity (Wh)
-    capacity = models.IntegerField(null=True)
+    capacity = models.IntegerField(null=True, blank=True)
 
-    # Created at
+    # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
-
-    # Updated at
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Constraint(models.Model):
@@ -65,10 +77,8 @@ class Constraint(models.Model):
     # Stop value
     stop = models.IntegerField()
 
-    # Created at
+    # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
-
-    # Updated at
     updated_at = models.DateTimeField(auto_now=True)
 
 
@@ -91,8 +101,6 @@ class Prediction(models.Model):
     # Predicted cost (c€/kWh)
     cost = ArrayField(models.FloatField(), size=24)
 
-    # Created at
+    # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
-
-    # Updated at
     updated_at = models.DateTimeField(auto_now=True)
