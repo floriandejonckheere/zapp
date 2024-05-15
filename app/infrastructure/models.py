@@ -90,6 +90,9 @@ class Constraint(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.constraint_type} {self.constraint_direction} ({self.start} - {self.stop})'
+
 
 class Prediction(models.Model):
     # Primary key
@@ -113,3 +116,6 @@ class Prediction(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.home.name} ({self.date})'
