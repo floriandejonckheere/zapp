@@ -59,6 +59,11 @@ class Device(models.Model):
 
 class Constraint(models.Model):
     class ConstraintType(models.TextChoices):
+        TIME = "TI", _("Time")
+        COST = "CO", _("Cost")
+        SOURCE = "SO", _("Source")
+
+    class ConstraintDirection(models.TextChoices):
         IN = "IN", _("In")
         OUT = "OUT", _("Out")
 
@@ -68,8 +73,12 @@ class Constraint(models.Model):
     # Device
     device = models.ForeignKey('Device', on_delete=models.CASCADE)
 
-    # Type (in or out)
-    constraint_type = models.CharField(max_length=3, choices=ConstraintType.choices, default=ConstraintType.IN)
+    # Type
+    constraint_type = models.CharField(max_length=2, choices=ConstraintType.choices, default=ConstraintType.TIME)
+
+    # Direction
+    constraint_direction = models.CharField(max_length=3, choices=ConstraintDirection.choices,
+                                            default=ConstraintDirection.IN)
 
     # Start value
     start = models.IntegerField()
