@@ -62,6 +62,7 @@ class Constraint(models.Model):
         TIME = "TI", _("Time")
         COST = "CO", _("Cost")
         SOURCE = "SO", _("Source")
+        POWER = "PO", _("Power")
 
     class ConstraintDirection(models.TextChoices):
         IN = "IN", _("In")
@@ -85,6 +86,9 @@ class Constraint(models.Model):
 
     # Stop value
     stop = models.IntegerField()
+
+    # Source (only for source constraints)
+    source = models.ForeignKey('Device', on_delete=models.CASCADE, null=True, blank=True, related_name='source')
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
