@@ -36,3 +36,9 @@ class Device(models.Model):
 
     # Capacity (Wh)
     capacity = models.IntegerField(null=True)
+
+    # Created at
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Updated at
+    updated_at = models.DateTimeField(auto_now=True)
