@@ -1,0 +1,27 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$UrhRaC8j7ekKaCMW7sYb41$zRzyJVbjt6ii9EVj4OzJ1H3e4gq1UVOn/DAkYnNSSbk=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Admin",
+      "last_name": "istrator",
+      "email": "admin@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-05-15T05:48:41.094Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "user_id": 1
+    }
+  }
+]
