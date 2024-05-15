@@ -42,3 +42,30 @@ class Device(models.Model):
 
     # Updated at
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Constraint(models.Model):
+    class ConstraintType(models.TextChoices):
+        IN = "IN", _("In")
+        OUT = "OUT", _("Out")
+
+    # Primary key
+    id = models.AutoField(primary_key=True)
+
+    # Device
+    device = models.ForeignKey('Device', on_delete=models.CASCADE)
+
+    # Type (in or out)
+    constraint_type = models.CharField(max_length=3, choices=ConstraintType.choices, default=ConstraintType.IN)
+
+    # Start value
+    start = models.IntegerField()
+
+    # Stop value
+    stop = models.IntegerField()
+
+    # Created at
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Updated at
+    updated_at = models.DateTimeField(auto_now=True)
