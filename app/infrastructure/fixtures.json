@@ -1,0 +1,171 @@
+[
+  {
+    "model": "infrastructure.home",
+    "pk": 1,
+    "fields": {
+      "name": "Turku AMK",
+      "address": "Joukahaisenkatu 3, 20520 Turku",
+      "created_at": "2024-05-15T17:22:20.723Z",
+      "updated_at": "2024-05-15T17:22:20.723Z",
+      "users": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 1,
+    "fields": {
+      "home": 1,
+      "name": "House",
+      "device_type": "CO",
+      "power": null,
+      "capacity": null,
+      "created_at": "2024-05-15T17:23:41.218Z",
+      "updated_at": "2024-05-15T17:26:25.466Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 2,
+    "fields": {
+      "home": 1,
+      "name": "Grid",
+      "device_type": "GR",
+      "power": null,
+      "capacity": null,
+      "created_at": "2024-05-15T17:26:42.028Z",
+      "updated_at": "2024-05-15T17:26:42.028Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 3,
+    "fields": {
+      "home": 1,
+      "name": "Solar panel",
+      "device_type": "PR",
+      "power": 5000,
+      "capacity": null,
+      "created_at": "2024-05-15T17:26:59.478Z",
+      "updated_at": "2024-05-15T17:26:59.478Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 4,
+    "fields": {
+      "home": 1,
+      "name": "Battery",
+      "device_type": "ST",
+      "power": null,
+      "capacity": 15000,
+      "created_at": "2024-05-15T17:27:12.989Z",
+      "updated_at": "2024-05-15T17:27:12.989Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 5,
+    "fields": {
+      "home": 1,
+      "name": "Electric Vehicle",
+      "device_type": "CO",
+      "power": 7200,
+      "capacity": 40000,
+      "created_at": "2024-05-15T17:27:27.360Z",
+      "updated_at": "2024-05-15T17:27:27.360Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 6,
+    "fields": {
+      "home": 1,
+      "name": "HVAC",
+      "device_type": "CO",
+      "power": 3000,
+      "capacity": null,
+      "created_at": "2024-05-15T17:27:44.071Z",
+      "updated_at": "2024-05-15T17:27:44.071Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 1,
+    "fields": {
+      "device": 5,
+      "constraint_type": "TI",
+      "constraint_direction": "IN",
+      "start": 22,
+      "stop": 24,
+      "created_at": "2024-05-15T17:40:01.564Z",
+      "updated_at": "2024-05-15T17:40:01.564Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 2,
+    "fields": {
+      "device": 5,
+      "constraint_type": "TI",
+      "constraint_direction": "OUT",
+      "start": 0,
+      "stop": 6,
+      "created_at": "2024-05-15T17:40:11.761Z",
+      "updated_at": "2024-05-15T17:40:11.761Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 3,
+    "fields": {
+      "device": 2,
+      "constraint_type": "CO",
+      "constraint_direction": "IN",
+      "start": 0,
+      "stop": 999,
+      "created_at": "2024-05-15T17:44:38.175Z",
+      "updated_at": "2024-05-15T17:44:38.176Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 4,
+    "fields": {
+      "device": 2,
+      "constraint_type": "CO",
+      "constraint_direction": "OUT",
+      "start": -999,
+      "stop": 0,
+      "created_at": "2024-05-15T17:44:48.649Z",
+      "updated_at": "2024-05-15T17:44:48.650Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 5,
+    "fields": {
+      "device": 4,
+      "constraint_type": "CO",
+      "constraint_direction": "IN",
+      "start": 0,
+      "stop": 999,
+      "created_at": "2024-05-15T17:45:02.850Z",
+      "updated_at": "2024-05-15T17:45:02.850Z"
+    }
+  },
+  {
+    "model": "infrastructure.constraint",
+    "pk": 6,
+    "fields": {
+      "device": 4,
+      "constraint_type": "CO",
+      "constraint_direction": "OUT",
+      "start": -999,
+      "stop": 0,
+      "created_at": "2024-05-15T17:45:15.384Z",
+      "updated_at": "2024-05-15T17:45:15.384Z"
+    }
+  }
+]

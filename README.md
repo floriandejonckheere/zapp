@@ -14,6 +14,19 @@ Build and start the backend application:
 docker compose up -d app
 ```
 
+Create a superuser:
+
+```sh
+docker compose exec -ti app python manage.py createsuperuser
+```
+
+Seed the database with example data:
+
+```sh
+docker compose exec -ti app python manage.py loaddata app/users/fixtures.json
+docker compose exec -ti app python manage.py loaddata app/infrastructure/fixtures.json
+```
+
 Build and start the frontend application:
 
 ```sh
