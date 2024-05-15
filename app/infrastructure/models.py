@@ -1,3 +1,4 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -63,6 +64,32 @@ class Constraint(models.Model):
 
     # Stop value
     stop = models.IntegerField()
+
+    # Created at
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Updated at
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class Prediction(models.Model):
+    # Primary key
+    id = models.AutoField(primary_key=True)
+
+    # Home
+    home = models.ForeignKey('Home', on_delete=models.CASCADE)
+
+    # Date
+    date = models.DateField()
+
+    # Predicted energy production (W)
+    production = ArrayField(models.IntegerField(), size=24)
+
+    # Predicted energy consumption (W)
+    consumption = ArrayField(models.IntegerField(), size=24)
+
+    # Predicted cost (c€/kWh)
+    cost = ArrayField(models.FloatField(), size=24)
 
     # Created at
     created_at = models.DateTimeField(auto_now_add=True)
