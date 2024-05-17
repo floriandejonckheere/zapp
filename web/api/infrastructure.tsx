@@ -1,20 +1,13 @@
-import axios, { AxiosError } from 'axios'
+import { client } from '@/client'
 
 import { Home } from '@/types'
 
 export function getHomes() {
-  const token = localStorage.getItem('accessToken')
-
-  if (!token) {
-    throw new AxiosError('Unauthorized')
-  }
-
-  return axios
+  return client
     .get(`/api/homes`, {
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${JSON.parse(token)}`
+        Accept: 'application/json'
       }
     })
     .then((response): Home[] => {
