@@ -25,9 +25,17 @@ export interface Home {
 
 export interface Device {
   id: number
-  homeId: number
   name: string
   deviceType: string
   power: number | null
   capacity: number | null
+}
+
+export interface Constraint {
+  id: number
+  constraintType: string
+  constraintDirection: string
+  start: string
+  end: string
+  sourceId: string
 }
