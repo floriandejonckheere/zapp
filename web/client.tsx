@@ -3,6 +3,12 @@ import createAuthRefreshInterceptor from 'axios-auth-refresh'
 
 export const client = axios.create()
 
+if (window.localStorage.getItem('accessToken')) {
+  // @ts-ignore
+  const accessToken = JSON.parse(window.localStorage.getItem('accessToken'))
+  client.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+}
+
 export const setTokens = (accessToken: string, refreshToken: string) => {
   window.localStorage.setItem('accessToken', JSON.stringify(accessToken))
   window.localStorage.setItem('refreshToken', JSON.stringify(refreshToken))
