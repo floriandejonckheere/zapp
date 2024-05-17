@@ -19,13 +19,14 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
-from app.users import views as user_views
 from app.infrastructure import views as infrastructure_views
+from app.users import views as user_views
 
 router = routers.SimpleRouter(trailing_slash=False)
 router.register(r'users', user_views.UserViewSet)
 router.register(r'groups', user_views.GroupViewSet)
 router.register(r'homes', infrastructure_views.HomeViewSet)
+router.register('homes/(?P<home_id>.+)/devices$', infrastructure_views.DeviceViewSet, basename='devices')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
