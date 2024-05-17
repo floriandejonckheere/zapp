@@ -17,7 +17,11 @@ export default function App(props: {
       {/* White underlay */}
       <div className="fixed top-96 h-full w-full bg-slate-50"></div>
 
-      <div className="relative h-auto flex flex-col gap-4 p-6">{component}</div>
+      <div
+        className={`relative h-auto flex flex-col gap-4 p-6 ${footer && 'pb-24'}`}
+      >
+        {component}
+      </div>
 
       {footer && <Footer />}
     </div>
