@@ -12,6 +12,7 @@ import Signup from '@/pages/auth/signup'
 
 import Overview from '@/pages/overview'
 import Schedule from '@/pages/schedule'
+import Infrastructure from '@/pages/infrastructure'
 import Settings from '@/pages/settings'
 
 export default function App(): ReactElement {
@@ -49,9 +50,15 @@ export default function App(): ReactElement {
           element={<Layout title="Schedule" component={<Schedule />} />}
         />
         <Route
+          path="/infrastructure"
+          element={
+            <Layout title="Infrastructure" component={<Infrastructure />} />
+          }
+        />
+        <Route
           path="/settings"
           element={
-            <Layout title="Settings" component={<Settings />} footer={false} />
+            <Layout title="Settings" component={<Settings />} footer={true} />
           }
         />
       </Route>
