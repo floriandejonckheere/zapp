@@ -84,8 +84,17 @@ export default function Infrastructure(): ReactElement {
               key={device.id}
               className="w-full p-6 bg-white rounded-2xl shadow-md"
             >
-              {deviceTypeToIcon(device.deviceType)}
-              {device.name}
+              <div className="flex items-baseline">
+                {deviceTypeToIcon(device.deviceType)}
+                <div>
+                  <div className="font-medium text-lg">{device.name}</div>
+                  <div className="text-gray-500 text-sm">
+                    {device.power && `${device.power / 1000} kW`}
+                    {device.power && device.capacity && ', '}
+                    {device.capacity && `${device.capacity / 1000} kWh`}
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
     </>
