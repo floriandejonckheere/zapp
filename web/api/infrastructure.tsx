@@ -1,6 +1,6 @@
 import { client } from '@/client'
 
-import { Home } from '@/types'
+import { Device, Home } from '@/types'
 
 export function getHomes() {
   return client
@@ -11,6 +11,19 @@ export function getHomes() {
       }
     })
     .then((response): Home[] => {
+      return response.data
+    })
+}
+
+export function getDevices(homeId: number): Device[] {
+  return client
+    .get(`/api/homes/${homeId}/devices`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+    .then((response) => {
       return response.data
     })
 }

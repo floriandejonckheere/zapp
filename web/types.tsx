@@ -22,3 +22,12 @@ export interface Home {
   name: string
   address: string
 }
+
+export interface Device {
+  id: number
+  homeId: number
+  name: string
+  deviceType: string
+  power: number | null
+  capacity: number | null
+}
