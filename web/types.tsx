@@ -36,6 +36,6 @@ export interface Constraint {
   constraintType: string
   constraintDirection: string
   start: string
-  end: string
+  stop: string
   sourceId: string
 }
