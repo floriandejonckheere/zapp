@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import *
+from .models import Home, Device, Constraint, Prediction, Schedule, ScheduleElement
 
 admin.site.register(Home)
 admin.site.register(Device)
