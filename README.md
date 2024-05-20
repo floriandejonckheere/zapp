@@ -17,7 +17,7 @@ docker compose up -d app
 Seed the database with example data:
 
 ```sh
-docker compose exec -ti app python manage.py loaddata app/fixtures.json app/users/fixtures.json app/infrastructure/fixtures.json
+docker compose exec -ti app python manage.py loaddata app/fixtures.json app/users/fixtures.json app/infrastructure/fixtures.json app/schedule/fixtures.json
 ```
 
 Build and start the frontend application:
