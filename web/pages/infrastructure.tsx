@@ -34,8 +34,8 @@ function Constraints(props: { homeId: number; deviceId: number }) {
       return (
         <div key={constraint.id} className="text-sm">
           <ClockIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
-          {constraint.start && `From ${constraint.start}:00 `}
-          {constraint.end && `Until ${constraint.end}:00`}
+          {constraint.start != null && `From ${constraint.start}:00 `}
+          {constraint.stop != null && `Until ${constraint.stop}:00`}
         </div>
       )
     } else if (constraint.constraintType === 'CO') {
@@ -43,8 +43,8 @@ function Constraints(props: { homeId: number; deviceId: number }) {
       return (
         <div key={constraint.id} className="text-sm">
           <CurrencyDollarIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
-          {constraint.start && `From ${constraint.start} c€/kWh `}
-          {constraint.end && `Until ${constraint.end} c€/kWh`}
+          {constraint.start != null && `From ${constraint.start} c€/kWh `}
+          {constraint.stop != null && `Until ${constraint.stop} c€/kWh`}
         </div>
       )
     } else if (constraint.constraintType === 'SO') {
@@ -61,7 +61,7 @@ function Constraints(props: { homeId: number; deviceId: number }) {
         <div key={constraint.id} className="text-sm">
           <BoltIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
           {/* @ts-expect-error error */}
-          Maximum {constraint.end / 1000} kW
+          Maximum {constraint.stop / 1000} kW
         </div>
       )
     }
@@ -71,7 +71,7 @@ function Constraints(props: { homeId: number; deviceId: number }) {
 export default function Infrastructure(): ReactElement {
   const { home } = useHome()
 
-  const { isSuccess: isSuccess, data: devices } = useQuery({
+  const { isSuccess, data } = useQuery({
     queryKey: ['devices', home?.id],
     // @ts-expect-error error
     queryFn: () => getDevices(home.id),
@@ -112,7 +112,7 @@ export default function Infrastructure(): ReactElement {
   return (
     <>
       {isSuccess &&
-        devices
+        data
           .filter((device) => device.deviceType != 'GR')
           .map((device) => (
             <div
