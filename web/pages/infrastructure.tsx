@@ -13,10 +13,7 @@ import {
 import { Constraint, Home } from '@/types'
 import { getConstraints, getDevices, getHomes } from '@/api/infrastructure'
 
-function Constraints(props: {
-  homeId: number
-  deviceId: number
-}): ReactElement {
+function Constraints(props: { homeId: number; deviceId: number }) {
   const { homeId, deviceId } = props
 
   const { isSuccess: isConstraintsSuccess, data: constraints } = useQuery({
