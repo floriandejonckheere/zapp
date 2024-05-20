@@ -20,15 +20,22 @@ from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
 
 from app.infrastructure import views as infrastructure_views
+from app.schedule import views as schedule_views
 from app.users import views as user_views
 
 router = routers.SimpleRouter(trailing_slash=False)
 router.register(r'users', user_views.UserViewSet)
 router.register(r'groups', user_views.GroupViewSet)
+
 router.register(r'homes', infrastructure_views.HomeViewSet)
 router.register('homes/(?P<home_id>.+)/devices$', infrastructure_views.DeviceViewSet, basename='devices')
 router.register('homes/(?P<home_id>.+)/devices/(?P<device_id>.+)/constraints$', infrastructure_views.ConstraintViewSet,
                 basename='constraints')
+
+router.register('homes/(?P<home_id>.+)/schedules/(?P<date>.+)$', schedule_views.ScheduleViewSet,
+                basename='schedules')
+router.register('schedules/(?P<schedule_id>.+)/elements$', schedule_views.ScheduleElementViewSet,
+                basename='elements')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

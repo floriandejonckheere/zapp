@@ -39,3 +39,15 @@ export interface Constraint {
   stop: string
   sourceId: string
 }
+
+export interface Schedule {
+  id: number
+  date: string
+  elements: ScheduleElement[]
+}
+
+export interface ScheduleElement {
+  id: number
+  device: Device
+  power: number[]
+}
