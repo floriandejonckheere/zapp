@@ -45,7 +45,7 @@ EXPOSE 8000
 CMD ["gunicorn", "app.wsgi", "--bind", "0.0.0.0:8000"]
 
 # Frontend build stage
-FROM node:18-alpine AS node
+FROM node:21-alpine AS node
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME/
