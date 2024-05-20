@@ -10,7 +10,8 @@ import './main.css'
 
 import App from './app'
 
-import { ThemeProvider } from './contexts/theme'
+import { ThemeProvider } from '@/contexts/theme'
+import { HomeProvider } from '@/contexts/home'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,11 +27,13 @@ const Main = () => {
   return (
     <React.StrictMode>
       <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </QueryClientProvider>
+        <HomeProvider>
+          <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </QueryClientProvider>
+        </HomeProvider>
       </ThemeProvider>
     </React.StrictMode>
   )
