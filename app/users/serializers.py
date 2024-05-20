@@ -5,13 +5,13 @@ from rest_framework import serializers
 from .models import User
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = DjangoUser
         fields = ['id', 'username', 'first_name', 'last_name', 'email', 'groups']
 
 
-class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
+class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = DjangoUser
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
@@ -28,13 +28,13 @@ class CreateUserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class UpdateUserSerializer(serializers.HyperlinkedModelSerializer):
+class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
 
 
-class UpdatePasswordSerializer(serializers.HyperlinkedModelSerializer):
+class UpdatePasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['password']
@@ -46,7 +46,7 @@ class UpdatePasswordSerializer(serializers.HyperlinkedModelSerializer):
         return super().update(instance, validated_data)
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['id', 'name']
