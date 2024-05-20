@@ -1,6 +1,6 @@
 import { client } from '@/client'
 
-import { Device, Home } from '@/types'
+import { Constraint, Device, Home } from '@/types'
 
 export function getHomes() {
   return client
@@ -15,7 +15,7 @@ export function getHomes() {
     })
 }
 
-export function getDevices(homeId: number): Device[] {
+export function getDevices(homeId: number) {
   return client
     .get(`/api/homes/${homeId}/devices`, {
       headers: {
@@ -23,7 +23,7 @@ export function getDevices(homeId: number): Device[] {
         Accept: 'application/json'
       }
     })
-    .then((response) => {
+    .then((response): Device[] => {
       return response.data
     })
 }
@@ -36,7 +36,7 @@ export function getConstraints(homeId: number, deviceId: number) {
         Accept: 'application/json'
       }
     })
-    .then((response) => {
+    .then((response): Constraint[] => {
       return response.data
     })
 }
