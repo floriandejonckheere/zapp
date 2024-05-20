@@ -82,10 +82,10 @@ class Constraint(models.Model):
                                             default=ConstraintDirection.IN)
 
     # Start value
-    start = models.IntegerField()
+    start = models.IntegerField(blank=True, null=True)
 
     # Stop value
-    stop = models.IntegerField()
+    stop = models.IntegerField(blank=True, null=True)
 
     # Source (only for source constraints)
     source = models.ForeignKey('Device', on_delete=models.CASCADE, null=True, blank=True, related_name='source')
