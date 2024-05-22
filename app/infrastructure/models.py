@@ -52,6 +52,14 @@ class Device(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # Device consumes energy
+    def consumes_energy(self):
+        return self.device_type in [Device.DeviceType.CONSUMER, Device.DeviceType.STORAGE, Device.DeviceType.GRID]
+
+    # Device produces energy
+    def produces_energy(self):
+        return self.device_type in [Device.DeviceType.PRODUCER, Device.DeviceType.STORAGE, Device.DeviceType.GRID]
+
     def __str__(self):
         return self.name
 
@@ -92,6 +100,36 @@ class Constraint(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def validate(self, power, prediction):
+        if self.constraint_type == Constraint.ConstraintType.TIME:
+            return self.validate_time(power, prediction)
+        elif self.constraint_type == Constraint.ConstraintType.COST:
+            return self.validate_cost(power, prediction)
+        elif self.constraint_type == Constraint.ConstraintType.SOURCE:
+            return self.validate_source(power, prediction)
+        elif self.constraint_type == Constraint.ConstraintType.POWER:
+            return self.validate_power(power, prediction)
+
+    def validate_time(self, power, prediction):
+        for i in range(24):
+            if self.start and i < self.start:
+                power[i] *= 0
+            if self.stop and i >= self.stop:
+                power[i] *= 0
+
+    def validate_cost(self, power, prediction):
+        for i in range(24):
+            if self.start and prediction.cost[i] < self.start:
+                power[i] *= 0
+            if self.stop and prediction.cost[i] >= self.stop:
+                power[i] *= 0
+
+    def validate_source(self, power, prediction):
+        raise NotImplementedError
+
+    def validate_power(self, power, prediction):
+        raise NotImplementedError
 
     def __str__(self):
         return f'{self.constraint_type} {self.constraint_direction} ({self.start} - {self.stop})'
