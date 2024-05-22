@@ -63,12 +63,15 @@ export default function Schedule(): ReactElement {
               {deviceTypeToIcon(element.device.deviceType)}
               <div className="font-medium text-sm">{element.device.name}</div>
             </div>
-            <div className="w-full flex">
+            <div className="w-full flex gap-0.5">
               {element.power.map((power, index) => (
                 <div
                   key={index}
-                  className={`w-[4%] h-5 ${power > 0 ? 'bg-green-400' : power < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
-                ></div>
+                  className={`w-[4%] h-5 text-xs  text-center ${power > 0 ? 'bg-green-400' : power < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
+                >
+                  {/* TODO: remove for final version */}
+                  {power}
+                </div>
               ))}
             </div>
           </div>
