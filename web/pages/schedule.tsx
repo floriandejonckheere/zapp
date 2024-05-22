@@ -18,6 +18,9 @@ export default function Schedule(): ReactElement {
   const date = new Date()
   date.setDate(date.getDate() + 1)
 
+  // TODO: remove this line
+  date.setDate(new Date(2024, 5, 21).getDate())
+
   const tomorrow = date.toISOString().substring(0, 10)
 
   const { isSuccess, data } = useQuery({
@@ -46,27 +49,30 @@ export default function Schedule(): ReactElement {
 
   if (!home) return <div>Loading...</div>
 
+  if (!isSuccess) return <div>An error occurred.</div>
+
+  if (data.length === 0) return <div>No schedules for tomorrow.</div>
+
   return (
     <div className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-6">
-      {isSuccess &&
-        data[0].elements
-          .filter((element) => element.device.deviceType != 'GR')
-          .map((element) => (
-            <div key={element.id} className="flex flex-col">
-              <div className="flex items-baseline">
-                {deviceTypeToIcon(element.device.deviceType)}
-                <div className="font-medium text-sm">{element.device.name}</div>
-              </div>
-              <div className="w-full flex">
-                {element.power.map((power, index) => (
-                  <div
-                    key={index}
-                    className={`w-[4%] h-5 ${power > 0 ? 'bg-green-400' : power < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
-                  ></div>
-                ))}
-              </div>
+      {data[0].elements
+        .filter((element) => element.device.deviceType != 'GR')
+        .map((element) => (
+          <div key={element.id} className="flex flex-col">
+            <div className="flex items-baseline">
+              {deviceTypeToIcon(element.device.deviceType)}
+              <div className="font-medium text-sm">{element.device.name}</div>
             </div>
-          ))}
+            <div className="w-full flex">
+              {element.power.map((power, index) => (
+                <div
+                  key={index}
+                  className={`w-[4%] h-5 ${power > 0 ? 'bg-green-400' : power < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
+                ></div>
+              ))}
+            </div>
+          </div>
+        ))}
     </div>
   )
 }
