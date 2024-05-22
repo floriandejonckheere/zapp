@@ -27,7 +27,7 @@ export default function Signup(): ReactElement {
   })
 
   return (
-    <div className="mt-7 bg-white rounded-lg shadow p-4 sm:p-7 dark:bg-slate-700">
+    <>
       <div className="text-center">
         <div className="inline-flex items-center gap-x-4 text-2xl font-bold dark:text-white">
           <BoltIcon className="h-10 w-10 p-2.5 bg-sky-700 text-white rounded-full" />
@@ -151,6 +151,6 @@ export default function Signup(): ReactElement {
           </div>
         </form>
       </div>
-    </div>
+    </>
   )
 }
