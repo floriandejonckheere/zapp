@@ -12,7 +12,7 @@ export default function DateSelector(): ReactElement {
   return (
     <div className="w-full hs-dropdown relative inline-flex [--placement:bottom-right]">
       <button
-        id="hs-dropdown-default"
+        id="hs-dropdown-date"
         type="button"
         className="w-full hs-dropdown-toggle p-4 inline-flex items-center gap-x-2 text-sm font-medium text-white"
       >
@@ -23,7 +23,7 @@ export default function DateSelector(): ReactElement {
 
       <div
         className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:divide-neutral-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full"
-        aria-labelledby="hs-dropdown-default"
+        aria-labelledby="hs-dropdown-date"
       >
         <a
           key="today"
