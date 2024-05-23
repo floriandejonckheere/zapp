@@ -14,7 +14,7 @@ export default function App(props: {
 
   return (
     <div className="flex flex-col h-full w-full bg-sky-700">
-      <div className="flex-grow overflow-auto scrollbar-hide">
+      <div className="pb-16 md:pb-0 flex-grow overflow-auto scrollbar-hide">
         <Header title={title} back={!footer} />
 
         <HomeSelector />
