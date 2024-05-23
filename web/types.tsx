@@ -1,3 +1,8 @@
+export const TODAY = 'today'
+export const TOMORROW = 'tomorrow'
+
+export type DateType = typeof TODAY | typeof TOMORROW
+
 export interface Token {
   access: string
   refresh: string

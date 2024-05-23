@@ -6,27 +6,21 @@ import {
   CpuChipIcon,
   SunIcon
 } from '@heroicons/react/24/solid'
+import { format } from 'date-fns'
 
 import { useHome } from '@/contexts/home'
+import { useDate } from '@/contexts/date'
 
 import { getSchedules } from '@/api/schedule'
 
 export default function Schedule(): ReactElement {
   const { home } = useHome()
-
-  // Tomorrow's date
-  const date = new Date()
-  date.setDate(date.getDate() + 1)
-
-  // TODO: remove this line
-  date.setDate(new Date(2024, 5, 21).getDate())
-
-  const tomorrow = date.toISOString().substring(0, 10)
+  const { date } = useDate()
 
   const { isSuccess, data } = useQuery({
-    queryKey: ['schedules', home?.id, tomorrow],
+    queryKey: ['schedules', home?.id, date],
     // @ts-expect-error error
-    queryFn: () => getSchedules(home.id, tomorrow),
+    queryFn: () => getSchedules(home.id, format(date, 'yyyy-MM-dd')),
     enabled: !!home
   })
 

@@ -12,6 +12,7 @@ import App from './app'
 
 import { ThemeProvider } from '@/contexts/theme'
 import { HomeProvider } from '@/contexts/home'
+import { DateProvider } from '@/contexts/date'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,11 +29,13 @@ const Main = () => {
     <React.StrictMode>
       <ThemeProvider>
         <HomeProvider>
-          <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </QueryClientProvider>
+          <DateProvider>
+            <QueryClientProvider client={queryClient}>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </QueryClientProvider>
+          </DateProvider>
         </HomeProvider>
       </ThemeProvider>
     </React.StrictMode>
