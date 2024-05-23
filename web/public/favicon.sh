@@ -15,4 +15,6 @@ convert -background none -density 2000 -resize 192x192 ${SOURCE} logo192.png
 convert -background none -density 2000 -resize 256x256 ${SOURCE} logo256.png
 convert -background none -density 2000 -resize 512x512 ${SOURCE} logo512.png
 
+convert -background white -density 2000 -resize 512x512 maskable.svg maskable.png
+
 echo "Generated ${FAVICON}"
