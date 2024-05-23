@@ -55,7 +55,9 @@ export default function App(): ReactElement {
           />
           <Route
             path="/home"
-            element={<Layout title="Home" component={<Home />} />}
+            element={
+              <Layout title="Home" component={<Home />} dateSelector={false} />
+            }
           />
           <Route
             path="/settings"
