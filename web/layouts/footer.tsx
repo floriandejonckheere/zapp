@@ -4,7 +4,7 @@ import { BoltIcon, CalendarIcon, HomeIcon } from '@heroicons/react/24/solid'
 
 export default function Footer(): ReactElement {
   return (
-    <div className="w-full bg-slate-50">
+    <div className="fixed bottom-0 md:relative w-full bg-slate-50">
       <nav className="text-white font-bold flex flex-row justify-center">
         <NavLink
           to="/overview"
