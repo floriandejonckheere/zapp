@@ -55,14 +55,6 @@ class Device(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Device consumes energy
-    def consumes_energy(self):
-        return self.device_type in [Device.DeviceType.CONSUMER, Device.DeviceType.STORAGE, Device.DeviceType.GRID]
-
-    # Device produces energy
-    def produces_energy(self):
-        return self.device_type in [Device.DeviceType.PRODUCER, Device.DeviceType.STORAGE, Device.DeviceType.GRID]
-
     def __str__(self):
         return self.name
 
