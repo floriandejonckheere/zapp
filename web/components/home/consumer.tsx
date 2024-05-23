@@ -4,7 +4,7 @@ import { Device, Home } from '@/types'
 
 import { Time } from '@/components/home/constraints/time'
 
-import { deviceTypeToIcon, deviceTypeToName } from './_shared'
+import { deviceTypeToIcon } from './_shared'
 import { Price } from '@/components/home/constraints/price'
 import { Source } from '@/components/home/constraints/source'
 import { Power } from '@/components/home/constraints/power'
@@ -16,18 +16,16 @@ export default function Consumer(props: { home: Home; device: Device }) {
     <>
       <div className="flex items-baseline">
         {deviceTypeToIcon(device.deviceType)}
-        <div>
+        <div className="mr-2">
           <div className="font-medium text-lg">{device.name}</div>
-          <div className="text-gray-500 text-sm">
-            {device.power && `${device.power / 1000} kW`}
-            {device.power && device.capacity && ', '}
-            {device.capacity && `${device.capacity / 1000} kWh`}
-          </div>
         </div>
 
-        <div className="flex-1" />
         <div className="text-gray-500 text-xs">
-          {deviceTypeToName(device.deviceType)}
+          {(device.power || device.capacity) && '('}
+          {device.power && `${device.power / 1000} kW`}
+          {device.power && device.capacity && ', '}
+          {device.capacity && `${device.capacity / 1000} kWh`}
+          {(device.power || device.capacity) && ')'}
         </div>
       </div>
 
