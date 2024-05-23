@@ -25,27 +25,23 @@ export default function Home(): ReactElement {
   return (
     <>
       {isSuccess &&
-        data
-          .filter((device) => device.deviceType != 'GR')
-          .map((device) => (
-            <div
-              key={device.id}
-              className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-3"
-            >
-              {device.deviceType === 'CO' && (
-                <Consumer home={home} device={device} />
-              )}
-              {device.deviceType === 'PR' && (
-                <Producer home={home} device={device} />
-              )}
-              {device.deviceType === 'ST' && (
-                <Storage home={home} device={device} />
-              )}
-              {device.deviceType === 'GR' && (
-                <Grid home={home} device={device} />
-              )}
-            </div>
-          ))}
+        data.map((device) => (
+          <div
+            key={device.id}
+            className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-3"
+          >
+            {device.deviceType === 'CO' && (
+              <Consumer home={home} device={device} />
+            )}
+            {device.deviceType === 'PR' && (
+              <Producer home={home} device={device} />
+            )}
+            {device.deviceType === 'ST' && (
+              <Storage home={home} device={device} />
+            )}
+            {device.deviceType === 'GR' && <Grid home={home} device={device} />}
+          </div>
+        ))}
     </>
   )
 }
