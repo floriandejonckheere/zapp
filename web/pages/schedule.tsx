@@ -11,6 +11,8 @@ import { format } from 'date-fns'
 import { useHome } from '@/contexts/home'
 import { useDate } from '@/contexts/date'
 
+import Spinner from '@/components/spinner'
+
 import { getSchedules } from '@/api/schedule'
 
 export default function Schedule(): ReactElement {
@@ -41,9 +43,17 @@ export default function Schedule(): ReactElement {
     }
   }
 
-  if (!home) return <div>Loading...</div>
+  if (!home)
+    return (
+      <div className="h-full w-full flex justify-center">
+        <Spinner color="text-white" />
+      </div>
+    )
 
-  if (!isSuccess) return <div>An error occurred.</div>
+  if (!isSuccess)
+    return (
+      <div className="text-white text-center font-bold">An error occurred.</div>
+    )
 
   if (data.length === 0) return <div>No schedules for tomorrow.</div>
 
