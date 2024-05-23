@@ -20,11 +20,11 @@ export default function HomeSelector(): ReactElement {
 
   return (
     <div className="w-full px-6">
-      <div className="w-full hs-dropdown relative inline-flex mb-4">
+      <div className="w-full hs-dropdown relative inline-flex">
         <button
           id="hs-dropdown-default"
           type="button"
-          className="w-full hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium text-white"
+          className="w-full hs-dropdown-toggle p-4 inline-flex items-center gap-x-2 text-sm font-medium text-white"
         >
           {home ? home.name : 'Select a home'}
           <span className="flex-1" />
