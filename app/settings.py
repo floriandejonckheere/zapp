@@ -176,3 +176,7 @@ LOGGING = {
         },
     }
 }
+
+CRONJOBS = [
+    ('* * * * *', 'app.schedule.commands.generate_schedule.handle')
+]

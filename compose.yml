@@ -37,9 +37,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.scheduler
-    command: >
-      sh -c "echo '0 0 * * * /usr/local/bin/python /app/schedule/commands/generate_schedule.py >> /var/log/cron.log 2>&1' | crontab - && crond -f"
-
 
     depends_on:
       - app
@@ -47,7 +44,6 @@ services:
       - .development.env
     volumes:
       - .:/app/:cached
-      - pip:/usr/local/lib/python3.12/site-packages
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
 
