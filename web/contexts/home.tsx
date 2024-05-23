@@ -1,4 +1,3 @@
-// homeContext.tsx
 import React, { createContext, useContext, useState } from 'react'
 
 import { Home } from '@/types'
