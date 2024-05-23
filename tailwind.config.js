@@ -6,7 +6,11 @@ module.exports = {
     'node_modules/preline/dist/*.js'
   ],
   darkMode: 'class',
-  plugins: [require('@tailwindcss/forms'), require('preline/plugin')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('preline/plugin'),
+    require('tailwind-scrollbar-hide')
+  ],
   variants: {
     extend: {
       opacity: ['disabled']
