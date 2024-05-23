@@ -1,8 +1,11 @@
-import React from 'react'
-import { ClockIcon } from '@heroicons/react/24/solid'
+import React, { useState } from 'react'
+import { ChevronDownIcon, ClockIcon } from '@heroicons/react/24/solid'
 
 export function Time(props: { start: number | null; stop: number | null }) {
   const { start, stop } = props
+  const [editing, setEditing] = useState(false)
+  const [startValue, setStartValue] = useState(start)
+  const [stopValue, setStopValue] = useState(stop)
 
   return (
     <div className="text-xs flex">
@@ -10,9 +13,64 @@ export function Time(props: { start: number | null; stop: number | null }) {
       Time limit
       <div className="flex-1" />
       <div className="text-gray-500">
-        {start == null && stop == null && 'No limit'}
-        {start != null && `From ${start}:00 `}
-        {stop != null && `Until ${stop}:00`}
+        {!editing && (
+          <>
+            <a
+              className="w-24 flex border-b-[1px] border-transparent"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault()
+                setEditing(!editing)
+              }}
+            >
+              {start == null && stop == null && 'No limit'}
+              {[start, stop]
+                .filter((x) => x != null)
+                .map((x) => `${x}:00`.padStart(5, '0'))
+                .join(' - ')}
+              <span className="flex-1" />
+              <ChevronDownIcon className="w-4 h-4" />
+            </a>
+          </>
+        )}
+        {editing && (
+          <>
+            <input
+              className="w-4 p-0 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
+              type="number"
+              min="0"
+              max="24"
+              value={startValue ?? ''}
+              onChange={(e) => {
+                const value = e.target.value
+
+                value === ''
+                  ? setStartValue(null)
+                  : setStartValue(Math.min(24, Math.max(0, parseInt(value))))
+              }}
+              autoFocus
+            />
+            :00{' - '}
+            <input
+              className="w-4 p-0 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
+              type="number"
+              min="0"
+              max="24"
+              value={stopValue ?? ''}
+              onChange={(e) => {
+                const value = e.target.value
+
+                value === ''
+                  ? setStopValue(null)
+                  : setStopValue(Math.min(24, Math.max(0, parseInt(value))))
+              }}
+              onBlur={() => {
+                setEditing(false)
+              }}
+            />
+            :00
+          </>
+        )}
       </div>
     </div>
   )
