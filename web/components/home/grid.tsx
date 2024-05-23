@@ -3,7 +3,6 @@ import React from 'react'
 import { Device, Home } from '@/types'
 
 import { deviceTypeToIcon, deviceTypeToName } from './_shared'
-import { Constraints } from './_constraints'
 
 export default function Grid(props: { home: Home; device: Device }) {
   const { home, device } = props
@@ -24,8 +23,6 @@ export default function Grid(props: { home: Home; device: Device }) {
       <div className="text-gray-500 text-xs">
         {deviceTypeToName(device.deviceType)}
       </div>
-
-      <Constraints homeId={home.id} deviceId={device.id} />
     </div>
   )
 }
