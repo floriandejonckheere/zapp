@@ -26,7 +26,7 @@ export function Source(props: { id: number; source: string | null }) {
         <button
           id={`hs-dropdown-source-${id}`}
           type="button"
-          className="w-20 hs-dropdown-toggle inline-flex items-center text-gray-500"
+          className="w-24 hs-dropdown-toggle inline-flex items-center text-gray-500"
         >
           {source == null ? 'No limit' : sourceTypeToName(source)}
           <span className="flex-1" />

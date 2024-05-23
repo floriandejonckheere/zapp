@@ -15,7 +15,7 @@ export function Power(props: { power: number | null }) {
         {!editing && (
           <>
             <a
-              className="w-20 flex border-b-[1px] border-transparent"
+              className="w-24 flex border-b-[1px] border-transparent"
               href="#"
               onClick={(e) => {
                 e.preventDefault()
