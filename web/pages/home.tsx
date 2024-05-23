@@ -68,7 +68,7 @@ function Constraints(props: { homeId: number; deviceId: number }) {
   })
 }
 
-export default function Infrastructure(): ReactElement {
+export default function Home(): ReactElement {
   const { home } = useHome()
 
   const { isSuccess, data } = useQuery({

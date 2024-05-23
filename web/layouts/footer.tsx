@@ -29,7 +29,7 @@ export default function Footer(): ReactElement {
           Schedule
         </NavLink>
         <NavLink
-          to="/infrastructure"
+          to="/home"
           className={({ isActive }) =>
             `w-1/3 flex flex-col items-center gap-2 p-4 text-sm ${
               isActive ? 'bg-sky-700 text-white' : 'bg-transparent text-sky-700'
@@ -37,7 +37,7 @@ export default function Footer(): ReactElement {
           }
         >
           <HomeIcon className="h-4 w-4" />
-          Infrastructure
+          Home
         </NavLink>
       </nav>
     </div>

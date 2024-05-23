@@ -13,7 +13,7 @@ import Signup from '@/pages/auth/signup'
 
 import Overview from '@/pages/overview'
 import Schedule from '@/pages/schedule'
-import Infrastructure from '@/pages/infrastructure'
+import Home from '@/pages/home'
 import Settings from '@/pages/settings'
 
 export default function App(): ReactElement {
@@ -54,10 +54,8 @@ export default function App(): ReactElement {
             element={<Layout title="Schedule" component={<Schedule />} />}
           />
           <Route
-            path="/infrastructure"
-            element={
-              <Layout title="Infrastructure" component={<Infrastructure />} />
-            }
+            path="/home"
+            element={<Layout title="Home" component={<Home />} />}
           />
           <Route
             path="/settings"
