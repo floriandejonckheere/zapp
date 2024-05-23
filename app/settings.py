@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'app.infrastructure',
     'app.schedule',
     'app.algorithm',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
