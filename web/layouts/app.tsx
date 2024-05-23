@@ -26,9 +26,10 @@ export default function App(props: {
       <div className="pb-16 md:pb-0 flex-grow overflow-auto scrollbar-hide">
         <Header title={title} back={!footer} />
 
-        {homeSelector && <HomeSelector />}
-
-        {dateSelector && <DateSelector />}
+        <div className="flex px-6">
+          {homeSelector && <HomeSelector />}
+          {dateSelector && <DateSelector />}
+        </div>
 
         <div className="flex flex-col gap-4 p-6">{component}</div>
       </div>
