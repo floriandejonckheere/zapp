@@ -2,8 +2,12 @@ import React from 'react'
 
 import { Device, Home } from '@/types'
 
+import { Time } from '@/components/home/constraints/time'
+
 import { deviceTypeToIcon, deviceTypeToName } from './_shared'
-import { Constraints } from './_constraints'
+import { Price } from '@/components/home/constraints/price'
+import { Source } from '@/components/home/constraints/source'
+import { Power } from '@/components/home/constraints/power'
 
 export default function Consumer(props: { home: Home; device: Device }) {
   const { home, device } = props
@@ -27,7 +31,10 @@ export default function Consumer(props: { home: Home; device: Device }) {
         </div>
       </div>
 
-      <Constraints homeId={home.id} deviceId={device.id} />
+      <Time start={device.startTimeIn} stop={device.stopTimeIn} />
+      <Price start={device.startPriceIn} stop={device.stopPriceIn} />
+      <Source source={device.sourceIn} />
+      <Power power={device.powerIn} />
     </>
   )
 }

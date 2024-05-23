@@ -35,15 +35,18 @@ export interface Device {
   priority: number
   power: number | null
   capacity: number | null
-}
-
-export interface Constraint {
-  id: number
-  constraintType: string
-  constraintDirection: string
-  start: string
-  stop: string
-  sourceId: string
+  startTimeIn: number | null
+  stopTimeIn: number | null
+  startTimeOut: number | null
+  stopTimeOut: number | null
+  startPriceIn: number | null
+  stopPriceIn: number | null
+  startPriceOut: number | null
+  stopPriceOut: number | null
+  sourceIn: string | null
+  sourceOut: string | null
+  powerIn: number | null
+  powerOut: number | null
 }
 
 export interface Schedule {
