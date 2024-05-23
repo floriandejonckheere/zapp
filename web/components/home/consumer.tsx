@@ -31,7 +31,7 @@ export default function Consumer(props: { home: Home; device: Device }) {
 
       <Time start={device.startTimeIn} stop={device.stopTimeIn} />
       <Price start={device.startPriceIn} stop={device.stopPriceIn} />
-      <Source source={device.sourceIn} />
+      <Source id={device.id} source={device.sourceIn} />
       <Power power={device.powerIn} />
     </>
   )
