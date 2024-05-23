@@ -6,7 +6,6 @@ import {
   CpuChipIcon,
   SunIcon
 } from '@heroicons/react/24/solid'
-import { format } from 'date-fns'
 
 import { useHome } from '@/contexts/home'
 import { useDate } from '@/contexts/date'
@@ -14,6 +13,7 @@ import { useDate } from '@/contexts/date'
 import Spinner from '@/components/spinner'
 
 import { getSchedules } from '@/api/schedule'
+import { dateTypeToAPIString } from '@/utils'
 
 export default function Schedule(): ReactElement {
   const { home } = useHome()
@@ -22,7 +22,7 @@ export default function Schedule(): ReactElement {
   const { isSuccess, data } = useQuery({
     queryKey: ['schedules', home?.id, date],
     // @ts-expect-error error
-    queryFn: () => getSchedules(home.id, format(date, 'yyyy-MM-dd')),
+    queryFn: () => getSchedules(home.id, dateTypeToAPIString(date)),
     enabled: !!home
   })
 
@@ -54,8 +54,12 @@ export default function Schedule(): ReactElement {
     return (
       <div className="text-white text-center font-bold">An error occurred.</div>
     )
-
-  if (data.length === 0) return <div>No schedules for tomorrow.</div>
+  if (data.length === 0)
+    return (
+      <div className="text-white text-center font-bold">
+        No schedule found for {date}.
+      </div>
+    )
 
   return (
     <div className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-6">
