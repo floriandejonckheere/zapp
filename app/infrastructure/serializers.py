@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Home, Device, Constraint
+from .models import Home, Device
 
 
 class HomeSerializer(serializers.ModelSerializer):
@@ -12,10 +12,23 @@ class HomeSerializer(serializers.ModelSerializer):
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['id', 'name', 'device_type', 'priority', 'power', 'capacity']
-
-
-class ConstraintSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Constraint
-        fields = ['id', 'constraint_type', 'constraint_direction', 'start', 'stop']
+        fields = [
+            'id',
+            'name',
+            'device_type',
+            'priority',
+            'power',
+            'capacity',
+            'start_time_in',
+            'stop_time_in',
+            'start_time_out',
+            'stop_time_out',
+            'start_price_in',
+            'stop_price_in',
+            'start_price_out',
+            'stop_price_out',
+            'source_in',
+            'source_out',
+            'power_in',
+            'power_out',
+        ]
