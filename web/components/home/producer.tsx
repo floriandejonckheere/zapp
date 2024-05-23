@@ -31,7 +31,7 @@ export default function Producer(props: { home: Home; device: Device }) {
 
       <Time start={device.startTimeOut} stop={device.stopTimeOut} />
       <Price start={device.startPriceOut} stop={device.stopPriceOut} />
-      <Source id={device.id} source={device.sourceOut} />
+      <Source source={device.sourceOut} />
       <Power power={device.powerOut} />
     </>
   )
