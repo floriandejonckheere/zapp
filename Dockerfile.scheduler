@@ -33,11 +33,9 @@ RUN apk add --no-cache tzdata curl \
 # Copy your application
 ADD . $APP_HOME/
 
-# Set up crontab
-RUN echo "0 0 * * * /usr/local/bin/python /app/schedule/commands/generate_schedule.py >> /var/log/cron.log 2>&1" > /etc/crontabs/root
-
 # Ensure the proper permissions
 RUN chmod 0644 /etc/crontabs/root
 
 # Add crond service
-CMD ["crond", "-f"]
+CMD ["sh", "-c", "python /app/manage.py crontab add && crond -f -l 0"]
+
