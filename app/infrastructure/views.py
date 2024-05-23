@@ -1,7 +1,7 @@
 from rest_framework import permissions, viewsets
 
-from .models import Home, Device, Constraint
-from .serializers import HomeSerializer, DeviceSerializer, ConstraintSerializer
+from .models import Home, Device
+from .serializers import HomeSerializer, DeviceSerializer
 
 
 class HomeViewSet(viewsets.ModelViewSet):
@@ -25,17 +25,3 @@ class DeviceViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         home_id = self.kwargs['home_id']
         return Device.objects.filter(home=home_id)
-
-
-class ConstraintViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows constraints to be viewed or edited.
-    """
-    model = Constraint
-    serializer_class = ConstraintSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        home_id = self.kwargs['home_id']
-        device_id = self.kwargs['device_id']
-        return Constraint.objects.filter(device__home=home_id, device=device_id)

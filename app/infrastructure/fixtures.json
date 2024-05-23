@@ -21,6 +21,18 @@
       "device_type": "CO",
       "power": null,
       "capacity": null,
+      "start_time_in": null,
+      "stop_time_in": null,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:23:41.218Z",
       "updated_at": "2024-05-15T17:26:25.466Z"
     }
@@ -34,6 +46,18 @@
       "device_type": "GR",
       "power": null,
       "capacity": null,
+      "start_time_in": null,
+      "stop_time_in": null,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:26:42.028Z",
       "updated_at": "2024-05-15T17:26:42.028Z"
     }
@@ -47,6 +71,18 @@
       "device_type": "PR",
       "power": 5000,
       "capacity": null,
+      "start_time_in": null,
+      "stop_time_in": null,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:26:59.478Z",
       "updated_at": "2024-05-15T17:26:59.478Z"
     }
@@ -60,6 +96,18 @@
       "device_type": "ST",
       "power": null,
       "capacity": 15000,
+      "start_time_in": null,
+      "stop_time_in": null,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:27:12.989Z",
       "updated_at": "2024-05-15T17:27:12.989Z"
     }
@@ -73,6 +121,18 @@
       "device_type": "CO",
       "power": 7200,
       "capacity": 40000,
+      "start_time_in": 22,
+      "stop_time_in": 6,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": "SO",
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:27:27.360Z",
       "updated_at": "2024-05-15T17:27:27.360Z"
     }
@@ -86,92 +146,20 @@
       "device_type": "CO",
       "power": 3000,
       "capacity": null,
+      "start_time_in": null,
+      "stop_time_in": null,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": null,
+      "start_price_out": null,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
       "created_at": "2024-05-15T17:27:44.071Z",
       "updated_at": "2024-05-15T17:27:44.071Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 1,
-    "fields": {
-      "device": 5,
-      "constraint_type": "TI",
-      "constraint_direction": "IN",
-      "start": 22,
-      "stop": 24,
-      "source": null,
-      "created_at": "2024-05-15T17:40:01.564Z",
-      "updated_at": "2024-05-15T17:40:01.564Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 2,
-    "fields": {
-      "device": 5,
-      "constraint_type": "TI",
-      "constraint_direction": "OUT",
-      "start": 0,
-      "stop": 6,
-      "source": null,
-      "created_at": "2024-05-15T17:40:11.761Z",
-      "updated_at": "2024-05-15T17:40:11.761Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 3,
-    "fields": {
-      "device": 2,
-      "constraint_type": "CO",
-      "constraint_direction": "IN",
-      "start": 0,
-      "stop": null,
-      "source": null,
-      "created_at": "2024-05-15T17:44:38.175Z",
-      "updated_at": "2024-05-15T17:44:38.176Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 4,
-    "fields": {
-      "device": 2,
-      "constraint_type": "CO",
-      "constraint_direction": "OUT",
-      "start": null,
-      "stop": 0,
-      "source": null,
-      "created_at": "2024-05-15T17:44:48.649Z",
-      "updated_at": "2024-05-15T17:44:48.650Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 5,
-    "fields": {
-      "device": 4,
-      "constraint_type": "CO",
-      "constraint_direction": "IN",
-      "start": 0,
-      "stop": null,
-      "source": null,
-      "created_at": "2024-05-15T17:45:02.850Z",
-      "updated_at": "2024-05-15T17:45:02.850Z"
-    }
-  },
-  {
-    "model": "infrastructure.constraint",
-    "pk": 6,
-    "fields": {
-      "device": 4,
-      "constraint_type": "CO",
-      "constraint_direction": "OUT",
-      "start": null,
-      "stop": 0,
-      "source": null,
-      "created_at": "2024-05-15T17:45:15.384Z",
-      "updated_at": "2024-05-15T17:45:15.384Z"
     }
   }
 ]

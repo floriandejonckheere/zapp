@@ -29,8 +29,6 @@ router.register(r'groups', user_views.GroupViewSet)
 
 router.register(r'homes', infrastructure_views.HomeViewSet)
 router.register('homes/(?P<home_id>.+)/devices$', infrastructure_views.DeviceViewSet, basename='devices')
-router.register('homes/(?P<home_id>.+)/devices/(?P<device_id>.+)/constraints$', infrastructure_views.ConstraintViewSet,
-                basename='constraints')
 
 router.register('homes/(?P<home_id>.+)/schedules/(?P<date>.+)$', schedule_views.ScheduleViewSet,
                 basename='schedules')
