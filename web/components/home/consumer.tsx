@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Device, Home } from '@/types'
+import { Device } from '@/types'
 
 import { Time } from '@/components/home/constraints/time'
 
@@ -9,8 +9,8 @@ import { Price } from '@/components/home/constraints/price'
 import { Source } from '@/components/home/constraints/source'
 import { Power } from '@/components/home/constraints/power'
 
-export default function Consumer(props: { home: Home; device: Device }) {
-  const { home, device } = props
+export default function Consumer(props: { device: Device }) {
+  const { device } = props
 
   return (
     <>

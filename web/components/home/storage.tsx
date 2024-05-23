@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { Device, Home } from '@/types'
+import { Device } from '@/types'
 
 import { Time } from '@/components/home/constraints/time'
 
 import { deviceTypeToIcon } from './_shared'
 import { Price } from '@/components/home/constraints/price'
 
-export default function Storage(props: { home: Home; device: Device }) {
-  const { home, device } = props
+export default function Storage(props: { device: Device }) {
+  const { device } = props
 
   return (
     <>
