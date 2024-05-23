@@ -32,6 +32,7 @@ export interface Device {
   id: number
   name: string
   deviceType: string
+  priority: number
   power: number | null
   capacity: number | null
 }

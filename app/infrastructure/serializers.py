@@ -12,7 +12,7 @@ class HomeSerializer(serializers.ModelSerializer):
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['id', 'name', 'device_type', 'power', 'capacity']
+        fields = ['id', 'name', 'device_type', 'priority', 'power', 'capacity']
 
 
 class ConstraintSerializer(serializers.ModelSerializer):

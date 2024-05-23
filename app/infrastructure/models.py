@@ -42,6 +42,9 @@ class Device(models.Model):
     # Type (consumer, producer, storage, or grid)
     device_type = models.CharField(max_length=2, choices=DeviceType.choices, default=DeviceType.CONSUMER)
 
+    # Priority
+    priority = models.IntegerField(default=0)
+
     # Power (W)
     power = models.IntegerField(null=True, blank=True)
 
