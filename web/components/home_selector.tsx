@@ -6,7 +6,7 @@ import { getHomes } from '@/api/infrastructure'
 
 import { useHome } from '@/contexts/home'
 
-export default function Home_selector(): ReactElement {
+export default function HomeSelector(): ReactElement {
   const { home, setHome } = useHome()
 
   const { isSuccess, data } = useQuery({
