@@ -21,7 +21,7 @@ export const deviceTypeToName = (deviceType: string) => {
 export const deviceTypeToIcon = (deviceType: string) => {
   if (deviceType === 'CO') {
     // Consumer
-    return <CpuChipIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+    return <CpuChipIcon className="inline-block mr-2 w-4 h-4 text-gray-700" />
   } else if (deviceType === 'PR') {
     // Producer
     return <SunIcon className="inline-block mr-2 w-4 h-4 text-yellow-400" />
@@ -31,6 +31,6 @@ export const deviceTypeToIcon = (deviceType: string) => {
       <Battery100Icon className="inline-block mr-2 w-4 h-4 text-green-400" />
     )
   } else {
-    return <BoltIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+    return <BoltIcon className="inline-block mr-2 w-4 h-4 text-yellow-400" />
   }
 }

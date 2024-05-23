@@ -30,16 +30,10 @@ export default function Home(): ReactElement {
             key={device.id}
             className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-3"
           >
-            {device.deviceType === 'CO' && (
-              <Consumer home={home} device={device} />
-            )}
-            {device.deviceType === 'PR' && (
-              <Producer home={home} device={device} />
-            )}
-            {device.deviceType === 'ST' && (
-              <Storage home={home} device={device} />
-            )}
-            {device.deviceType === 'GR' && <Grid home={home} device={device} />}
+            {device.deviceType === 'CO' && <Consumer device={device} />}
+            {device.deviceType === 'PR' && <Producer device={device} />}
+            {device.deviceType === 'ST' && <Storage device={device} />}
+            {device.deviceType === 'GR' && <Grid device={device} />}
           </div>
         ))}
     </>
