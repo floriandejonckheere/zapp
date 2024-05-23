@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - '5432:5432'
 
   app:
     build:
@@ -22,7 +22,7 @@ services:
     env_file:
       - .development.env
     ports:
-      - "8000:8000"
+      - '8000:8000'
 
   web:
     build:
@@ -31,7 +31,25 @@ services:
     depends_on:
       - app
     ports:
-      - "8080:80"
+      - '8080:80'
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.scheduler
+    command: >
+      sh -c "echo '0 0 * * * /usr/local/bin/python /app/schedule/commands/generate_schedule.py >> /var/log/cron.log 2>&1' | crontab - && crond -f"
+
+
+    depends_on:
+      - app
+    env_file:
+      - .development.env
+    volumes:
+      - .:/app/:cached
+      - pip:/usr/local/lib/python3.12/site-packages
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
 
 volumes:
   pip:
