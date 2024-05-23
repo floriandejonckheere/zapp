@@ -13,13 +13,13 @@ export default function App(props: {
   const { title, component, footer = true } = props
 
   return (
-    <div className="min-h-full w-full bg-sky-700">
-      <Header title={title} back={!footer} />
+    <div className="flex flex-col h-full w-full bg-sky-700">
+      <div className="flex-grow overflow-auto scrollbar-hide">
+        <Header title={title} back={!footer} />
 
-      <HomeSelector />
+        <HomeSelector />
 
-      <div className={`flex flex-col gap-4 p-6 ${footer && 'pb-24'}`}>
-        {component}
+        <div className="flex flex-col gap-4 p-6">{component}</div>
       </div>
 
       {footer && <Footer />}
