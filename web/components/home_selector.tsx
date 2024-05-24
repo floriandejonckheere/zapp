@@ -45,7 +45,8 @@ export default function HomeSelector(): ReactElement {
                   setHome(home)
                 }}
               >
-                {home.name}
+                <span className="font-bold">{home.name}</span>
+                <span className="text-xs text-gray-700">{home.address}</span>
               </a>
             ))
           : 'Loading...'}
