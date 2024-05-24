@@ -15,7 +15,7 @@ export function Power(props: {
 
   return (
     <div className="text-xs flex">
-      <BoltIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+      <BoltIcon className="inline-block mr-2 w-4 h-4 text-yellow-500" />
       Power limit
       <div className="flex-1" />
       <div className="text-gray-500">

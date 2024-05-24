@@ -10,7 +10,7 @@ export function Source(props: {
 
   return (
     <div className="text-xs flex">
-      <FireIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+      <FireIcon className="inline-block mr-2 w-4 h-4 text-red-400" />
       Power source
       <div className="flex-1" />
       <select
