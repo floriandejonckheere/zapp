@@ -1,7 +1,10 @@
-from rest_framework import permissions, viewsets
+from itertools import chain
+
+from rest_framework import permissions, viewsets, status
+from rest_framework.response import Response
 
 from .models import Home, Device
-from .serializers import HomeSerializer, DeviceSerializer
+from .serializers import HomeSerializer, DeviceSerializer, UpdateDeviceSerializer
 
 
 class HomeViewSet(viewsets.ModelViewSet):
@@ -25,3 +28,17 @@ class DeviceViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         home_id = self.kwargs['home_id']
         return Device.objects.filter(home=home_id)
+
+    def get_object(self):
+        return Device.objects.get(id=self.kwargs['pk'])
+
+    def partial_update(self, request, *args, **kwargs):
+        serializer = UpdateDeviceSerializer(instance=self.get_object(), data=request.data)
+
+        if serializer.is_valid():
+            self.perform_update(serializer)
+        else:
+            return Response({'detail': ' '.join(list(chain.from_iterable(serializer.errors.values())))},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(serializer.data)
