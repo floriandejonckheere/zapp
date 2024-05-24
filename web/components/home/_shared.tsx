@@ -18,19 +18,33 @@ export const deviceTypeToName = (deviceType: string) => {
   } else return 'Other'
 }
 
-export const deviceTypeToIcon = (deviceType: string) => {
+export const deviceTypeToIcon = (deviceType: string, size: number = 4) => {
   if (deviceType === 'CO') {
     // Consumer
-    return <CpuChipIcon className="inline-block mr-2 w-4 h-4 text-gray-700" />
+    return (
+      <CpuChipIcon
+        className={`inline-block mr-2 w-${size} h-${size} text-gray-700`}
+      />
+    )
   } else if (deviceType === 'PR') {
     // Producer
-    return <SunIcon className="inline-block mr-2 w-4 h-4 text-yellow-400" />
+    return (
+      <SunIcon
+        className={`inline-block mr-2 w-${size} h-${size} text-yellow-400`}
+      />
+    )
   } else if (deviceType === 'ST') {
     // Storage
     return (
-      <Battery100Icon className="inline-block mr-2 w-4 h-4 text-green-400" />
+      <Battery100Icon
+        className={`inline-block mr-2 w-${size} h-${size} text-green-400`}
+      />
     )
   } else {
-    return <BoltIcon className="inline-block mr-2 w-4 h-4 text-yellow-400" />
+    return (
+      <BoltIcon
+        className={`inline-block mr-2 w-${size} h-${size} text-yellow-400`}
+      />
+    )
   }
 }
