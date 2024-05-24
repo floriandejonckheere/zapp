@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChevronDownIcon, ClockIcon } from '@heroicons/react/24/solid'
 
-export function Time(props: { start: number | null; stop: number | null }) {
-  const { start, stop } = props
+export function Time(props: {
+  start: number | null
+  stop: number | null
+  onUpdate: (start: number | null, stop: number | null) => void
+}) {
+  const { start, stop, onUpdate } = props
   const [editing, setEditing] = useState(false)
   const [startValue, setStartValue] = useState(start)
   const [stopValue, setStopValue] = useState(stop)
+
+  useEffect(() => {
+    if (!editing && (start != startValue || stop != stopValue))
+      onUpdate(startValue, stopValue)
+  }, [editing])
 
   return (
     <div className="text-xs flex">
@@ -23,8 +32,8 @@ export function Time(props: { start: number | null; stop: number | null }) {
                 setEditing(!editing)
               }}
             >
-              {start == null && stop == null && 'No limit'}
-              {[start, stop]
+              {startValue == null && stopValue == null && 'No limit'}
+              {[startValue, stopValue]
                 .filter((x) => x != null)
                 .map((x) => `${x}:00`.padStart(5, '0'))
                 .join(' - ')}

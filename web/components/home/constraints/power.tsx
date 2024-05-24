@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BoltIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 
-export function Power(props: { power: number | null }) {
-  const { power } = props
+export function Power(props: {
+  power: number | null
+  onUpdate: (power: number | null) => void
+}) {
+  const { power, onUpdate } = props
   const [editing, setEditing] = useState(false)
   const [value, setValue] = useState(power)
+
+  useEffect(() => {
+    if (!editing && power != value) onUpdate(value)
+  }, [editing])
 
   return (
     <div className="text-xs flex">
@@ -22,7 +29,7 @@ export function Power(props: { power: number | null }) {
                 setEditing(!editing)
               }}
             >
-              {power == null ? 'No limit' : `${power} kW`}
+              {power == null ? 'No limit' : `${value} W`}
               <span className="flex-1" />
               <ChevronDownIcon className="w-4 h-4" />
             </a>
@@ -44,7 +51,7 @@ export function Power(props: { power: number | null }) {
               }}
               autoFocus
             />
-            kW
+            W
           </>
         )}
       </div>

@@ -8,7 +8,7 @@ import Producer from '@/components/home/producer'
 import Storage from '@/components/home/storage'
 import Grid from '@/components/home/grid'
 
-import { getDevices } from '@/api/infrastructure'
+import { getDevices, updateDevice } from '@/api/infrastructure'
 
 export default function Home(): ReactElement {
   const { home } = useHome()
@@ -30,10 +30,30 @@ export default function Home(): ReactElement {
             key={device.id}
             className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-3"
           >
-            {device.deviceType === 'CO' && <Consumer device={device} />}
-            {device.deviceType === 'PR' && <Producer device={device} />}
-            {device.deviceType === 'ST' && <Storage device={device} />}
-            {device.deviceType === 'GR' && <Grid device={device} />}
+            {device.deviceType === 'CO' && (
+              <Consumer
+                device={device}
+                onUpdate={(data) => updateDevice(home.id, device.id, data)}
+              />
+            )}
+            {device.deviceType === 'PR' && (
+              <Producer
+                device={device}
+                onUpdate={(data) => updateDevice(home.id, device.id, data)}
+              />
+            )}
+            {device.deviceType === 'ST' && (
+              <Storage
+                device={device}
+                onUpdate={(data) => updateDevice(home.id, device.id, data)}
+              />
+            )}
+            {device.deviceType === 'GR' && (
+              <Grid
+                device={device}
+                onUpdate={(data) => updateDevice(home.id, device.id, data)}
+              />
+            )}
           </div>
         ))}
     </>

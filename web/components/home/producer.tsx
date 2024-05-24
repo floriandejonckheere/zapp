@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Device } from '@/types'
+import { Device, UpdateDevice } from '@/types'
 
 import { Time } from '@/components/home/constraints/time'
 
@@ -9,8 +9,11 @@ import { Price } from '@/components/home/constraints/price'
 import { Source } from '@/components/home/constraints/source'
 import { Power } from '@/components/home/constraints/power'
 
-export default function Producer(props: { device: Device }) {
-  const { device } = props
+export default function Producer(props: {
+  device: Device
+  onUpdate: (data: UpdateDevice) => void
+}) {
+  const { device, onUpdate } = props
 
   return (
     <>
@@ -29,10 +32,32 @@ export default function Producer(props: { device: Device }) {
         </div>
       </div>
 
-      <Time start={device.startTimeOut} stop={device.stopTimeOut} />
-      <Price start={device.startPriceOut} stop={device.stopPriceOut} />
-      <Source source={device.sourceOut} />
-      <Power power={device.powerOut} />
+      <Time
+        start={device.startTimeOut}
+        stop={device.stopTimeOut}
+        onUpdate={(start, stop) => {
+          onUpdate({ startTimeOut: start, stopTimeOut: stop })
+        }}
+      />
+      <Price
+        start={device.startPriceOut}
+        stop={device.stopPriceOut}
+        onUpdate={(start, stop) => {
+          onUpdate({ startPriceOut: start, stopPriceOut: stop })
+        }}
+      />
+      <Source
+        source={device.sourceOut}
+        onUpdate={(source) => {
+          onUpdate({ sourceOut: source })
+        }}
+      />
+      <Power
+        power={device.powerOut}
+        onUpdate={(power) => {
+          onUpdate({ powerOut: power })
+        }}
+      />
     </>
   )
 }
