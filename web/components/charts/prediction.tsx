@@ -81,7 +81,8 @@ export default function PredictionChart(
         },
         title: {
           text: 'c€/kWh'
-        }
+        },
+        min: 0
       }
     ],
     series: props.series,
