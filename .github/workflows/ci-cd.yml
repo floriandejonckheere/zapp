@@ -57,23 +57,22 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Yarn
+      - name: Install PNPM
         run: |
           corepack enable
-          corepack prepare yarn@stable --activate
-          yarn set version 4.2.2
+          corepack prepare pnpm --activate
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Typecheck
-        run: yarn tsc
+        run: pnpm tsc
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
   build-app:
     name: Continuous Integration (build-app)
@@ -147,8 +146,8 @@ jobs:
       name: production
       url: https://zapp.dejonckhee.re
     needs:
-        - build-app
-        - build-web
+      - build-app
+      - build-web
 
     steps:
       - uses: actions/checkout@v4

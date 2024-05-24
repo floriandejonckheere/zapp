@@ -23,7 +23,7 @@ docker compose exec -ti app python manage.py loaddata app/fixtures.json app/user
 Build and start the frontend application:
 
 ```sh
-yarn run dev
+pnpm run dev
 ```
 
 The application is now available at [http://localhost:5173](http://localhost:5173).
