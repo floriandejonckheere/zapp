@@ -17,8 +17,6 @@ from sklearn import metrics
 
 #TODO: save trained model, so retraining doesn't have to take place every time
 
-warnings.simplefilter(action='ignore', category=DeprecationWarning)
-
 tz = pytz.timezone('Europe/Berlin')
 current_time = datetime.now(tz)
 
@@ -150,8 +148,8 @@ def predict_labels():
     new_data_scaled = scaler.transform(new_data)
 
     predicted_load = model.predict(new_data_scaled)
-    print("Active Power: ", predicted_load[0][0], "\nSpot Price: ", predicted_load[0][1], "\nLoad: ", predicted_load[0][2])
-    return predicted_load
+    #print("AC_Power: ", predicted_load[0][0], "\nSpot Price: ", predicted_load[0][1], "\nLoad: ", predicted_load[0][2])
+    return predicted_load[0]
 
 
 def train_and_evaluate_model():
@@ -171,7 +169,7 @@ def train_and_evaluate_model():
             'Temperature_60.44751,22.2982',
             'Cloud_Cover_60.44751,22.2982']
 
-    labels = ['Active_power', 'Spot_price', 'load_h',]
+    labels = ['AC_Power', 'Spot_price', 'load_h']
     #labels = ['AC_Power']
     #labels = ['DC_power']
     #labels = ['Spot_price']
@@ -179,9 +177,9 @@ def train_and_evaluate_model():
 
     X = data_all[features]
     y = data_all[labels]
-
+    #y = y.values.ravel() #Remove if multiple labels
+    
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
@@ -198,8 +196,12 @@ def train_and_evaluate_model():
     #print(f"Mean Squared Error: {mse}")
     #print(f"Root Mean Squared Error: {rmse}")
     #print(f"R^2 Score: {r2}")
-
+    
+    #kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    #scores = cross_val_score(model, X, y, cv=kf, scoring='neg_mean_squared_error')
+    #mse_scores = -scores
+    #print("Mean Squared Error for each fold:", mse_scores)
+    #print("Average Mean Squared Error:", np.mean(mse_scores))
     #is_model = True
+    
     return model
-
-predict_labels()
