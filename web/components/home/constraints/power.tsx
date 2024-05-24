@@ -29,7 +29,7 @@ export function Power(props: {
                 setEditing(!editing)
               }}
             >
-              {power == null ? 'No limit' : `${value} W`}
+              {value === null ? 'No limit' : `${value} W`}
               <span className="flex-1" />
               <ChevronDownIcon className="w-4 h-4" />
             </a>
