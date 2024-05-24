@@ -25,7 +25,7 @@ export function Price(props: {
         {!editing && (
           <>
             <a
-              className="w-24 flex border-b-[1px] border-transparent"
+              className="w-32 flex border-b-[1px] border-transparent"
               href="#"
               onClick={(e) => {
                 e.preventDefault()
@@ -39,6 +39,7 @@ export function Price(props: {
                 .filter((x) => x != null)
                 .map((x) => `${x} c€`.padStart(4, '0'))
                 .join(' - ')}
+              {(startValue != null || stopValue != null) && '/kWh'}
               <span className="flex-1" />
               <ChevronDownIcon className="w-4 h-4" />
             </a>

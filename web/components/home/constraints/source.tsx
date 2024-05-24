@@ -15,7 +15,7 @@ export function Source(props: {
       <div className="flex-1" />
       <select
         value={value || ''}
-        className="w-20 border-0 p-0 text-xs text-gray-500 bg-none focus:ring-0"
+        className="w-28 border-0 p-0 text-xs text-gray-500 bg-none focus:ring-0"
         onChange={(e) => {
           const value = e.target.value === '' ? null : e.target.value
 
