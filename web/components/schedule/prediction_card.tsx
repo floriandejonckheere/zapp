@@ -16,7 +16,11 @@ export default function PredictionCard(props: { home: Home; date: DateType }) {
     enabled: !!home
   })
 
-  if (!isSuccess) return null
+  if (!isSuccess)
+    return (
+      <div className="text-white text-center font-bold">An error occurred.</div>
+    )
+  if (data.length === 0) return null
 
   return (
     <div className="w-full py-4 bg-white rounded-2xl shadow-md flex flex-col">
