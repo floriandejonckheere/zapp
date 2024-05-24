@@ -1,7 +1,7 @@
 from rest_framework import permissions, viewsets
 
-from .models import Schedule, ScheduleElement
-from .serializers import ScheduleSerializer, ScheduleElementSerializer
+from .models import Schedule, ScheduleElement, Prediction
+from .serializers import ScheduleSerializer, ScheduleElementSerializer, PredictionSerializer
 
 
 class ScheduleViewSet(viewsets.ModelViewSet):
@@ -29,3 +29,17 @@ class ScheduleElementViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         schedule_id = self.kwargs['schedule_id']
         return ScheduleElement.objects.filter(schedule=schedule_id)
+
+
+class PredictionViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows predictions to be viewed or edited.
+    """
+    model = Prediction
+    serializer_class = PredictionSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        home_id = self.kwargs['home_id']
+        date = self.kwargs.get('date')
+        return Prediction.objects.filter(home=home_id, date=date)
