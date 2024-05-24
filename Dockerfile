@@ -55,7 +55,7 @@ RUN corepack enable && corepack prepare pnpm --activate
 
 # Install NPM dependencies
 ADD package.json $APP_HOME/
-ADD pnpm-lock.lock $APP_HOME/
+ADD pnpm-lock.yaml $APP_HOME/
 
 RUN pnpm install
 
