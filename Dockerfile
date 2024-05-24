@@ -50,21 +50,20 @@ FROM node:18-alpine AS node
 ENV APP_HOME /app
 WORKDIR $APP_HOME/
 
-# Install correct Yarn version
-RUN corepack enable && corepack prepare yarn@stable --activate && yarn set version 4.2.2 && yarn install
+# install PNPM
+RUN corepack enable && corepack prepare pnpm --activate
 
 # Install NPM dependencies
 ADD package.json $APP_HOME/
-ADD yarn.lock $APP_HOME/
-ADD .yarnrc.yml $APP_HOME/
+ADD pnpm-lock.lock $APP_HOME/
 
-RUN yarn install
+RUN pnpm install
 
 # Add web application
 ADD . $APP_HOME/
 
 # Build web application
-RUN yarn build
+RUN pnpm build
 
 # Frontend production stage
 FROM nginx AS web

@@ -25,13 +25,11 @@
     "@preline/dropdown": "^2.1.0",
     "@tanstack/react-query": "^5.37.1",
     "@uidotdev/usehooks": "^2.4.1",
-    "apexcharts": "^3.49.1",
     "axios": "^1.7.2",
     "axios-auth-refresh": "^3.3.6",
     "date-fns": "^3.6.0",
     "moment": "^2.30.1",
     "react": "^18.3.1",
-    "react-apexcharts": "^1.4.1",
     "react-dom": "^18.3.1",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
@@ -62,5 +60,5 @@
     "vite": "^5.2.11",
     "vitest": "^1.6.0"
   },
-  "packageManager": "yarn@4.2.2"
+  "packageManager": "pnpm@9.1.2+sha512.127dc83b9ea10c32be65d22a8efb4a65fb952e8fefbdfded39bdc3c97efc32d31b48b00420df2c1187ace28c921c902f0cb5a134a4d032b8b5295cbfa2c681e2"
 }
