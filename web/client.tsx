@@ -55,5 +55,6 @@ const refreshAuth = async (failedRequest) => {
 
 createAuthRefreshInterceptor(client, refreshAuth, {
   statusCodes: [401],
-  pauseInstanceWhileRefreshing: true
+  pauseInstanceWhileRefreshing: true,
+  retryInstance: client
 })
