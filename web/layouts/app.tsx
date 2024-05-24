@@ -4,7 +4,7 @@ import Header from '@/layouts/header'
 import Footer from '@/layouts/footer'
 
 import HomeSelector from '@/components/home_selector'
-import DateSelector from '@/components/date_selector'
+import NewDateSelector from '@/components/new_date_selector'
 
 export default function App(props: {
   title: string
@@ -28,7 +28,7 @@ export default function App(props: {
 
         <div className="flex px-6">
           {homeSelector && <HomeSelector />}
-          {dateSelector && <DateSelector />}
+          {dateSelector && <NewDateSelector />}
         </div>
 
         <div className="flex flex-col gap-4 p-6">{component}</div>
