@@ -39,7 +39,7 @@ export default function LoadCard(props: { home: Home; date: DateType }) {
             const checked = element.power[currentHour] != 0
 
             return (
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row items-center" key={element.id}>
                 {deviceTypeToIcon(element.device.deviceType)}
                 <div className="flex flex-col">
                   {element.device.name}
