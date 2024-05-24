@@ -18,7 +18,7 @@ export function Price(props: {
 
   return (
     <div className="text-xs flex">
-      <CurrencyEuroIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+      <CurrencyEuroIcon className="inline-block mr-2 w-4 h-4 text-green-700" />
       Price limit
       <div className="flex-1" />
       <div className="text-gray-500">
