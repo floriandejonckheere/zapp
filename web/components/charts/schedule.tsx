@@ -55,7 +55,7 @@ export default function ScheduleChart(props: ScheduleChartProps): ReactElement {
           // If it's a string, it's formatting the series name
           if (typeof date === 'string') return date
 
-          return format(new Date(date), 'HH:mm')
+          return format(new Date(date - 3 * 3600 * 1000), 'HH:mm') // TODO: fix timezones
         }
       }
     },
