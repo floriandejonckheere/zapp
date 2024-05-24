@@ -6,6 +6,7 @@ import { Time } from '@/components/infrastructure/constraints/time'
 
 import { deviceTypeToIcon } from './_shared'
 import { Price } from '@/components/infrastructure/constraints/price'
+import { Source } from '@/components/infrastructure/constraints/source'
 
 export default function Storage(props: {
   device: Device
@@ -43,6 +44,12 @@ export default function Storage(props: {
         stop={device.stopPriceIn}
         onUpdate={(start, stop) => {
           onUpdate({ startPriceIn: start, stopPriceIn: stop })
+        }}
+      />
+      <Source
+        source={device.sourceIn}
+        onUpdate={(source) => {
+          onUpdate({ sourceIn: source })
         }}
       />
 
