@@ -3,14 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 
 import { useHome } from '@/contexts/home'
 
-import Consumer from '@/components/home/consumer'
-import Producer from '@/components/home/producer'
-import Storage from '@/components/home/storage'
-import Grid from '@/components/home/grid'
+import Consumer from '@/components/infrastructure/consumer'
+import Producer from '@/components/infrastructure/producer'
+import Storage from '@/components/infrastructure/storage'
+import Grid from '@/components/infrastructure/grid'
 
 import { getDevices, updateDevice } from '@/api/infrastructure'
 
-export default function Home(): ReactElement {
+export default function Infrastructure(): ReactElement {
   const { home } = useHome()
 
   const { isSuccess, data } = useQuery({

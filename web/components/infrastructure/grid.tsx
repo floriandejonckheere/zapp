@@ -1,15 +1,11 @@
 import React from 'react'
 
-import { Time } from '@/components/home/constraints/time'
-import { Price } from '@/components/home/constraints/price'
-import { Source } from '@/components/home/constraints/source'
-import { Power } from '@/components/home/constraints/power'
-
 import { Device, UpdateDevice } from '@/types'
 
 import { deviceTypeToIcon } from './_shared'
+import { Price } from '@/components/infrastructure/constraints/price'
 
-export default function Consumer(props: {
+export default function Grid(props: {
   device: Device
   onUpdate: (data: UpdateDevice) => void
 }) {
@@ -32,13 +28,7 @@ export default function Consumer(props: {
         </div>
       </div>
 
-      <Time
-        start={device.startTimeIn}
-        stop={device.stopTimeIn}
-        onUpdate={(start, stop) => {
-          onUpdate({ startTimeIn: start, stopTimeIn: stop })
-        }}
-      />
+      <div className="mt-3 text-sm text-gray-700">Export</div>
       <Price
         start={device.startPriceIn}
         stop={device.stopPriceIn}
@@ -46,16 +36,13 @@ export default function Consumer(props: {
           onUpdate({ startPriceIn: start, stopPriceIn: stop })
         }}
       />
-      <Source
-        source={device.sourceIn}
-        onUpdate={(source) => {
-          onUpdate({ sourceIn: source })
-        }}
-      />
-      <Power
-        power={device.powerIn}
-        onUpdate={(power) => {
-          onUpdate({ powerIn: power })
+
+      <div className="mt-3 text-sm text-gray-700">Import</div>
+      <Price
+        start={device.startPriceOut}
+        stop={device.stopPriceOut}
+        onUpdate={(start, stop) => {
+          onUpdate({ startPriceOut: start, stopPriceOut: stop })
         }}
       />
     </>

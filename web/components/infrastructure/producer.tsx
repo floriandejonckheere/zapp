@@ -2,12 +2,13 @@ import React from 'react'
 
 import { Device, UpdateDevice } from '@/types'
 
-import { Time } from '@/components/home/constraints/time'
+import { Time } from '@/components/infrastructure/constraints/time'
 
 import { deviceTypeToIcon } from './_shared'
-import { Price } from '@/components/home/constraints/price'
+import { Price } from '@/components/infrastructure/constraints/price'
+import { Power } from '@/components/infrastructure/constraints/power'
 
-export default function Storage(props: {
+export default function Producer(props: {
   device: Device
   onUpdate: (data: UpdateDevice) => void
 }) {
@@ -30,23 +31,6 @@ export default function Storage(props: {
         </div>
       </div>
 
-      <div className="mt-3 text-sm text-gray-700">Charging</div>
-      <Time
-        start={device.startTimeIn}
-        stop={device.stopTimeIn}
-        onUpdate={(start, stop) => {
-          onUpdate({ startTimeIn: start, stopTimeIn: stop })
-        }}
-      />
-      <Price
-        start={device.startPriceIn}
-        stop={device.stopPriceIn}
-        onUpdate={(start, stop) => {
-          onUpdate({ startPriceIn: start, stopPriceIn: stop })
-        }}
-      />
-
-      <div className="mt-3 text-sm text-gray-700">Discharging</div>
       <Time
         start={device.startTimeOut}
         stop={device.stopTimeOut}
@@ -59,6 +43,12 @@ export default function Storage(props: {
         stop={device.stopPriceOut}
         onUpdate={(start, stop) => {
           onUpdate({ startPriceOut: start, stopPriceOut: stop })
+        }}
+      />
+      <Power
+        power={device.powerOut}
+        onUpdate={(power) => {
+          onUpdate({ powerOut: power })
         }}
       />
     </>
