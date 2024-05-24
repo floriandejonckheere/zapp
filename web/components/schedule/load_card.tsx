@@ -5,7 +5,7 @@ import { dateTypeToAPIString } from '@/utils'
 import { DateType, Home } from '@/types'
 
 import { getSchedules } from '@/api/schedule'
-import { deviceTypeToIcon } from '@/components/home/_shared'
+import { deviceTypeToIcon } from '@/components/infrastructure/_shared'
 
 export default function LoadCard(props: { home: Home; date: DateType }) {
   const { home, date } = props

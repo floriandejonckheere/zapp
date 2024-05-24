@@ -5,7 +5,7 @@ import { dateTypeToAPIString } from '@/utils'
 import { DateType, Home } from '@/types'
 
 import { getSchedules } from '@/api/schedule'
-import { deviceTypeToIcon } from '@/components/home/_shared'
+import { deviceTypeToIcon } from '@/components/infrastructure/_shared'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 
 export default function FlowCard(props: { home: Home; date: DateType }) {

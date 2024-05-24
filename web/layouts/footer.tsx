@@ -1,6 +1,10 @@
 import React, { ReactElement } from 'react'
 import { NavLink } from 'react-router-dom'
-import { BoltIcon, CalendarIcon, HomeIcon } from '@heroicons/react/24/solid'
+import {
+  BoltIcon,
+  BuildingOfficeIcon,
+  CalendarIcon
+} from '@heroicons/react/24/solid'
 
 export default function Footer(): ReactElement {
   return (
@@ -36,8 +40,8 @@ export default function Footer(): ReactElement {
             }`
           }
         >
-          <HomeIcon className="h-4 w-4" />
-          Home
+          <BuildingOfficeIcon className="h-4 w-4" />
+          Infrastructure
         </NavLink>
       </nav>
     </div>
