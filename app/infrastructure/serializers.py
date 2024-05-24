@@ -32,3 +32,22 @@ class DeviceSerializer(serializers.ModelSerializer):
             'power_in',
             'power_out',
         ]
+
+
+class UpdateDeviceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Device
+        fields = [
+            'start_time_in',
+            'stop_time_in',
+            'start_time_out',
+            'stop_time_out',
+            'start_price_in',
+            'stop_price_in',
+            'start_price_out',
+            'stop_price_out',
+            'source_in',
+            'source_out',
+            'power_in',
+            'power_out',
+        ]

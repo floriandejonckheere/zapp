@@ -28,10 +28,10 @@ router.register(r'users', user_views.UserViewSet)
 router.register(r'groups', user_views.GroupViewSet)
 
 router.register(r'homes', infrastructure_views.HomeViewSet)
-router.register('homes/(?P<home_id>.+)/devices$', infrastructure_views.DeviceViewSet, basename='devices')
+router.register(r'^homes/(?P<home_id>.+)/devices', infrastructure_views.DeviceViewSet, basename='devices')
 
 router.register('homes/(?P<home_id>.+)/schedules/(?P<date>.+)$', schedule_views.ScheduleViewSet,
-                basename='schedules')
+                basename='schedule')
 router.register('schedules/(?P<schedule_id>.+)/elements$', schedule_views.ScheduleElementViewSet,
                 basename='elements')
 
