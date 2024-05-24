@@ -4,7 +4,9 @@ import { useHome } from '@/contexts/home'
 import { useDate } from '@/contexts/date'
 
 import Spinner from '@/components/spinner'
+
 import ScheduleCard from '@/components/schedule/schedule_card'
+import PredictionCard from '@/components/schedule/prediction_card'
 
 export default function Schedule(): ReactElement {
   const { home } = useHome()
@@ -19,6 +21,7 @@ export default function Schedule(): ReactElement {
 
   return (
     <>
+      <PredictionCard home={home} date={date} />
       <ScheduleCard home={home} date={date} />
     </>
   )

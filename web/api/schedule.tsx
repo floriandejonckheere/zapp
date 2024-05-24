@@ -14,3 +14,16 @@ export function getSchedules(homeId: number, date: string) {
       return response.data
     })
 }
+
+export function getPrediction(homeId: number, date: string) {
+  return client
+    .get(`/api/homes/${homeId}/predictions/${date}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    })
+    .then((response) => {
+      return response.data
+    })
+}
