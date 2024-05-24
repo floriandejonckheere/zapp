@@ -38,7 +38,7 @@ export default function PredictionChart(
         enabled: false
       }
     },
-    colors: ['#a3e635', '#fb7185', '#93c5fd'],
+    colors: ['#4ade80', '#fb7185', '#93c5fd'],
     stroke: {
       curve: 'straight',
       width: 1

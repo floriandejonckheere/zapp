@@ -40,13 +40,18 @@ export default function ScheduleChart(props: ScheduleChartProps): ReactElement {
     },
     plotOptions: {
       bar: {
-        horizontal: true
+        horizontal: true,
+        barHeight: '80%',
+        rangeBarGroupRows: true
       }
+    },
+    legend: {
+      show: false
     },
     tooltip: {
       x: {
         formatter: (date) => {
-          // FIXME: not sure why this is needed, but it is
+          // If it's a string, it's formatting the series name
           if (typeof date === 'string') return date
 
           return format(new Date(date), 'HH:mm')
@@ -62,12 +67,5 @@ export default function ScheduleChart(props: ScheduleChartProps): ReactElement {
     ...props.options
   })
 
-  return (
-    <Chart
-      type="rangeBar"
-      options={options}
-      series={options.series}
-      height="150"
-    />
-  )
+  return <Chart type="rangeBar" options={options} series={options.series} />
 }
