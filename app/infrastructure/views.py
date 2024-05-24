@@ -12,7 +12,7 @@ class HomeViewSet(viewsets.ModelViewSet):
     API endpoint that allows homes to be viewed or edited.
     """
     model = Home
-    queryset = Home.objects.all().order_by('name')
+    queryset = Home.objects.all().order_by('id')
     serializer_class = HomeSerializer
     permission_classes = [permissions.IsAuthenticated]
 
