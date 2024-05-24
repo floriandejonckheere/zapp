@@ -27,7 +27,7 @@ class DeviceViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         home_id = self.kwargs['home_id']
-        return Device.objects.filter(home=home_id)
+        return Device.objects.filter(home=home_id).order_by('id')
 
     def get_object(self):
         return Device.objects.get(id=self.kwargs['pk'])
