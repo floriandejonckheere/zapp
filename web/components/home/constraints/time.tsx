@@ -33,6 +33,8 @@ export function Time(props: {
               }}
             >
               {startValue == null && stopValue == null && 'No limit'}
+              {startValue != null && stopValue == null && 'From '}
+              {startValue == null && stopValue != null && 'Until '}
               {[startValue, stopValue]
                 .filter((x) => x != null)
                 .map((x) => `${x}:00`.padStart(5, '0'))

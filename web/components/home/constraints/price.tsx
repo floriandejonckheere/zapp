@@ -33,6 +33,8 @@ export function Price(props: {
               }}
             >
               {startValue == null && stopValue == null && 'No limit'}
+              {startValue != null && stopValue == null && 'From '}
+              {startValue == null && stopValue != null && 'Up to '}
               {[startValue, stopValue]
                 .filter((x) => x != null)
                 .map((x) => `${x} c€`.padStart(4, '0'))

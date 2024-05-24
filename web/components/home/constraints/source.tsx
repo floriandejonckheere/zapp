@@ -24,8 +24,8 @@ export function Source(props: {
           onUpdate(value)
         }}
       >
-        <option value="">No limit</option>
-        <option value="SO">Solar</option>
+        <option value="">Any</option>
+        <option value="SO">Solar panel</option>
         <option value="BA">Battery</option>
         <option value="GR">Grid</option>
       </select>
