@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 interface ScheduleChartProps {
   categories: string[]
   series: ApexAxisChartSeries
+  annotations: ApexAnnotations
   min: number
   max: number
   options?: ApexOptions
@@ -64,6 +65,7 @@ export default function ScheduleChart(props: ScheduleChartProps): ReactElement {
       max: props.max
     },
     series: props.series,
+    annotations: props.annotations,
     ...props.options
   })
 

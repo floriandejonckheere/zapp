@@ -145,6 +145,14 @@ export default function ScheduleCard(props: {
           .fill('')
           .map((_, i) => `${i}:00`.padStart(5, '0'))}
         series={scheduleDataByPower}
+        annotations={{
+          xaxis: [
+            {
+              x: new Date().getTime() + 3 * 3600 * 1000, // TODO: fix timezones
+              borderColor: '#fb7185'
+            }
+          ]
+        }}
         min={
           new Date(`${dateTypeToAPIString(date)}T00:00:00`).getTime() +
           3 * 3600 * 1000
