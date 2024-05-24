@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { Device } from '@/types'
+import { Device, UpdateDevice } from '@/types'
 
 import { deviceTypeToIcon } from './_shared'
 import { Price } from '@/components/home/constraints/price'
 
-export default function Grid(props: { device: Device }) {
-  const { device } = props
+export default function Grid(props: {
+  device: Device
+  onUpdate: (data: UpdateDevice) => void
+}) {
+  const { device, onUpdate } = props
 
   return (
     <>
@@ -26,10 +29,22 @@ export default function Grid(props: { device: Device }) {
       </div>
 
       <div className="mt-3 text-sm text-gray-700">Export</div>
-      <Price start={device.startPriceIn} stop={device.stopPriceIn} />
+      <Price
+        start={device.startPriceIn}
+        stop={device.stopPriceIn}
+        onUpdate={(start, stop) => {
+          onUpdate({ startPriceIn: start, stopPriceIn: stop })
+        }}
+      />
 
       <div className="mt-3 text-sm text-gray-700">Import</div>
-      <Price start={device.startPriceOut} stop={device.stopPriceOut} />
+      <Price
+        start={device.startPriceOut}
+        stop={device.stopPriceOut}
+        onUpdate={(start, stop) => {
+          onUpdate({ startPriceOut: start, stopPriceOut: stop })
+        }}
+      />
     </>
   )
 }

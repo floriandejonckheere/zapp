@@ -1,21 +1,11 @@
 import React, { useState } from 'react'
 import { ChevronDownIcon, FireIcon } from '@heroicons/react/24/solid'
 
-function sourceTypeToName(source: string) {
-  switch (source) {
-    case 'SO':
-      return 'Solar'
-    case 'BA':
-      return 'Battery'
-    case 'GR':
-      return 'Grid'
-    default:
-      return 'Unknown'
-  }
-}
-
-export function Source(props: { source: string | null }) {
-  const { source } = props
+export function Source(props: {
+  source: string | null
+  onUpdate: (source: string | null) => void
+}) {
+  const { source, onUpdate } = props
   const [value, setValue] = useState(source)
 
   return (
@@ -27,7 +17,11 @@ export function Source(props: { source: string | null }) {
         value={value || ''}
         className="w-20 border-0 p-0 text-xs text-gray-500 bg-none focus:ring-0"
         onChange={(e) => {
-          setValue(e.target.value)
+          const value = e.target.value === '' ? null : e.target.value
+
+          setValue(value)
+
+          onUpdate(value)
         }}
       >
         <option value="">No limit</option>

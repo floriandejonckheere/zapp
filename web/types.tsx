@@ -49,6 +49,21 @@ export interface Device {
   powerOut: number | null
 }
 
+export interface UpdateDevice {
+  startTimeIn?: number | null
+  stopTimeIn?: number | null
+  startTimeOut?: number | null
+  stopTimeOut?: number | null
+  startPriceIn?: number | null
+  stopPriceIn?: number | null
+  startPriceOut?: number | null
+  stopPriceOut?: number | null
+  sourceIn?: string | null
+  sourceOut?: string | null
+  powerIn?: number | null
+  powerOut?: number | null
+}
+
 export interface Schedule {
   id: number
   date: string
