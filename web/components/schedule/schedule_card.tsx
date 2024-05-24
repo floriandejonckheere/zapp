@@ -47,7 +47,7 @@ export default function ScheduleCard(props: {
     )
   if (data.length === 0)
     return (
-      <div className="text-white text-center font-bold">
+      <div className="text-white text-center text-sm">
         No schedule found for {date}.
       </div>
     )
