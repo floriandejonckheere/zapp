@@ -25,7 +25,7 @@ export function Time(props: {
         {!editing && (
           <>
             <a
-              className="w-24 flex border-b-[1px] border-transparent"
+              className="w-32 flex border-b-[1px] border-transparent"
               href="#"
               onClick={(e) => {
                 e.preventDefault()
