@@ -38,6 +38,7 @@ class UpdateDeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
         fields = [
+            'priority',
             'start_time_in',
             'stop_time_in',
             'start_time_out',

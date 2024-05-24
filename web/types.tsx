@@ -50,6 +50,7 @@ export interface Device {
 }
 
 export interface UpdateDevice {
+  priority?: number | null
   startTimeIn?: number | null
   stopTimeIn?: number | null
   startTimeOut?: number | null
