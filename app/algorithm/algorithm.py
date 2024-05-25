@@ -1,5 +1,11 @@
-from app.infrastructure.models import Constraint
 from app.schedule.models import Schedule, Prediction, ScheduleElement
+
+
+class Context:
+    def __init__(self, hour, power, price):
+        self.hour = hour
+        self.power = power
+        self.price = price
 
 
 class Algorithm:
@@ -8,42 +14,36 @@ class Algorithm:
         self.date = date
 
     def run(self):
+        schedule = Schedule.objects.filter(home=self.home, date=self.date).first()
+
         # Don't do anything if the schedule is already created
-        if Schedule.objects.filter(home=self.home, date=self.date).exists():
-            return
+        if schedule:
+            return schedule
+
+        # Fetch prediction
+        prediction = Prediction.objects.filter(home=self.home, date=self.date).first()
+
+        if not prediction:
+            raise Exception(f'No prediction found for date {self.date}')
 
         # Create a new schedule
         schedule = Schedule(home=self.home, date=self.date)
         schedule.save()
 
-        # Calculate power yield
-        _power_yield = [self.power_yield_for(i) for i in range(24)]
+        # Generate contexts
+        contexts = [Context(i, prediction.production[i], prediction.price[i]) for i in range(24)]
 
         # Calculate energy schedule for each device
         for device in self.home.device_set.all():
-            # Power consumption (negative) or production (positive)
-            power_in = [-1 for _ in range(24)]
-            power_out = [1 for _ in range(24)]
+            power = []
 
-            # Validate constraint
-            for constraint in device.constraint_set.all():
-                if constraint.constraint_direction == Constraint.ConstraintDirection.IN:
-                    constraint.validate(power_in, self.prediction())
-                else:
-                    constraint.validate(power_out, self.prediction())
+            # Calculate power input/output for each context
+            for context in contexts:
+                power.append(device.power_in_context(context))
 
-            # Combine power consumption and production
-            power = [power_in[i] + power_out[i] for i in range(24)]
-
-            # Save the device schedule
+            # Create a new schedule element
             schedule_element = ScheduleElement(schedule=schedule, device=device, power=power)
             schedule_element.save()
 
         # Return the schedule
         return schedule
-
-    def power_yield_for(self, i):
-        return self.prediction().production[i] - self.prediction().consumption[i]
-
-    def prediction(self):
-        return Prediction.objects.get(home=self.home, date=self.date)
