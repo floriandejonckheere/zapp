@@ -12,6 +12,9 @@ class Command(BaseCommand):
         home = Home.objects.get(pk=1)
         date = '2024-05-26'
 
+        # Remove existing schedule
+        home.schedule_set.filter(date=date).delete()
+
         # Generate schedule
         schedule = Algorithm(home=home, date=date).run()
 
