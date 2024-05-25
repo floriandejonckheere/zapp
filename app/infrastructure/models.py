@@ -125,7 +125,23 @@ class Device(models.Model):
             # Return power
             return power_out
         elif self.device_type == Device.DeviceType.STORAGE:
-            pass
+            # Storage can both consume and produce energy
+            power_in = 1
+            power_out = -1
+
+            # Check time constraint (in and out)
+            power_in *= constraints.check_time(self.start_time_in, self.stop_time_in, context.hour)
+            power_out *= constraints.check_time(self.start_time_out, self.stop_time_out, context.hour)
+
+            # Check price constraint (in and out)
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+            power_out *= constraints.check_price(self.start_price_out, self.stop_price_out, context.price)
+
+            # Check power constraint (in only)
+            # TODO
+
+            # Return power
+            return power_in + power_out
         elif self.device_type == Device.DeviceType.PRODUCER:
             pass
 
