@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from app.infrastructure import constraints
+
 
 class Home(models.Model):
     # Primary key
@@ -83,6 +85,33 @@ class Device(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Calculate power within a context
+    def power_in_context(self, context):
+        if self.device_type == Device.DeviceType.CONSUMER:
+            # Consumers only consume energy
+            power_in = 1
+
+            # Check time constraint
+            power_in *= constraints.check_time(self.start_time_in, self.stop_time_in, context.hour)
+
+            # Check price constraint
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+
+            # Check source constraint
+            # TODO
+
+            # Check power constraint
+            # TODO
+
+            # Return power
+            return power_in
+        elif self.device_type == Device.DeviceType.PRODUCER:
+            pass
+        elif self.device_type == Device.DeviceType.STORAGE:
+            pass
+        elif self.device_type == Device.DeviceType.PRODUCER:
+            pass
 
     def __str__(self):
         return self.name
