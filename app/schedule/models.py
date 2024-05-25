@@ -18,8 +18,8 @@ class Prediction(models.Model):
     # Predicted energy consumption (W), per hour
     consumption = ArrayField(models.IntegerField(), size=24)
 
-    # Predicted cost (c€/kWh), per hour
-    cost = ArrayField(models.FloatField(), size=24)
+    # Predicted price (c€/kWh), per hour
+    price = ArrayField(models.FloatField(), size=24)
 
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)

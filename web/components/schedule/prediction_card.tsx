@@ -45,7 +45,7 @@ export default function PredictionCard(props: { home: Home; date: DateType }) {
           {
             name: 'Price',
             type: 'bar',
-            data: data[0].cost
+            data: data[0].price
           }
         ]}
       />
