@@ -47,7 +47,13 @@ export default function App(): ReactElement {
         >
           <Route
             path="/overview"
-            element={<Layout title="Overview" component={<Overview />} />}
+            element={
+              <Layout
+                title="Overview"
+                component={<Overview />}
+                dateSelector={false}
+              />
+            }
           />
           <Route
             path="/schedule"
