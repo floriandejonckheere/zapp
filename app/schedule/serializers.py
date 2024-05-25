@@ -7,7 +7,7 @@ from ..infrastructure.serializers import DeviceSerializer
 class PredictionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prediction
-        fields = ['id', 'home', 'date', 'production', 'consumption', 'cost']
+        fields = ['id', 'home', 'date', 'production', 'consumption', 'price']
 
 
 class ScheduleElementSerializer(serializers.ModelSerializer):
