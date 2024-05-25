@@ -142,8 +142,17 @@ class Device(models.Model):
 
             # Return power
             return power_in + power_out
-        elif self.device_type == Device.DeviceType.PRODUCER:
-            pass
+        elif self.device_type == Device.DeviceType.GRID:
+            # Grid can both consume and produce energy
+            power_in = 1
+            power_out = -1
+
+            # Check price constraint (in and out)
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+            power_out *= constraints.check_price(self.start_price_out, self.stop_price_out, context.price)
+
+            # Return power
+            return power_in + power_out
 
     def __str__(self):
         return self.name
