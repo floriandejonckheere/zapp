@@ -54,7 +54,7 @@ export default function App(): ReactElement {
             element={<Layout title="Schedule" component={<Schedule />} />}
           />
           <Route
-            path="/home"
+            path="/infrastructure"
             element={
               <Layout
                 title="Infrastructure"
