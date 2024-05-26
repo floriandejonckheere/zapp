@@ -17,7 +17,7 @@ services:
   migration:
     <<: *app
     command: python manage.py migrate
-    restart: "no"
+    restart: 'no'
 
   web:
     image: ghcr.io/floriandejonckheere/zapp/web:latest
@@ -25,21 +25,32 @@ services:
       - fcloud
     restart: unless-stopped
     labels:
-      traefik.enable: "true"
-      traefik.http.middlewares.zapp-tls.redirectscheme.scheme: "https"
+      traefik.enable: 'true'
+      traefik.http.middlewares.zapp-tls.redirectscheme.scheme: 'https'
 
-      traefik.http.routers.zapp.rule: "Host(`zapp.dejonckhee.re`)"
-      traefik.http.routers.zapp.entrypoints: "web"
-      traefik.http.routers.zapp.middlewares: "zapp-tls"
+      traefik.http.routers.zapp.rule: 'Host(`zapp.dejonckhee.re`)'
+      traefik.http.routers.zapp.entrypoints: 'web'
+      traefik.http.routers.zapp.middlewares: 'zapp-tls'
 
-      traefik.http.routers.zapp-tls.rule: "Host(`zapp.dejonckhee.re`)"
-      traefik.http.routers.zapp-tls.entrypoints: "websecure"
-      traefik.http.routers.zapp-tls.tls: "true"
-      traefik.http.routers.zapp-tls.tls.certresolver: "letsencrypt"
+      traefik.http.routers.zapp-tls.rule: 'Host(`zapp.dejonckhee.re`)'
+      traefik.http.routers.zapp-tls.entrypoints: 'websecure'
+      traefik.http.routers.zapp-tls.tls: 'true'
+      traefik.http.routers.zapp-tls.tls.certresolver: 'letsencrypt'
 
-      traefik.http.services.zapp.loadbalancer.server.port: "80"
+      traefik.http.services.zapp.loadbalancer.server.port: '80'
+
+  scheduler:
+    <<: *app
+    command: >
+      sh -c "echo '0 0 * * * /usr/local/bin/python /app/schedule/commands/generate_schedule.py >> /var/log/cron.log 2>&1' | crontab - && crond -f"
+
+    depends_on:
+      - app
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
 
 networks:
   fcloud:
     external: true
-    name: "fcloud_default"
+    name: 'fcloud_default'

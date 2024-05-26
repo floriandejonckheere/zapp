@@ -1,0 +1,41 @@
+# Scheduler build stage
+FROM python:3.12-alpine AS python
+
+ENV RUNTIME_DEPS postgresql
+ENV BUILD_DEPS build-base postgresql-dev
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME/
+
+# Install system dependencies
+RUN apk add --no-cache $BUILD_DEPS $RUNTIME_DEPS
+
+# Install Python dependencies
+ADD requirements.txt $APP_HOME/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Scheduler production stage
+FROM python AS scheduler
+
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+
+ENV APP_HOME /app
+WORKDIR $APP_HOME/
+USER root
+
+# Add cron
+RUN apk add --no-cache tzdata curl \
+    && apk add --no-cache --virtual build-deps postgresql-dev gcc python3-dev musl-dev \
+    && pip install psycopg2 \
+    && apk del build-deps
+
+# Copy your application
+ADD . $APP_HOME/
+
+# Ensure the proper permissions
+RUN chmod 0644 /etc/crontabs/root
+
+# Add crond service
+CMD ["sh", "-c", "python /app/manage.py crontab add && crond -f -l 0"]
+

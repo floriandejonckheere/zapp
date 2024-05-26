@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'app.infrastructure',
     'app.schedule',
     'app.algorithm',
+    'django_crontab'
 ]
 
 MIDDLEWARE = [
@@ -175,3 +176,7 @@ LOGGING = {
         },
     }
 }
+
+CRONJOBS = [
+    ('* * * * *', 'app.schedule.commands.generate_schedule.handle')
+]
