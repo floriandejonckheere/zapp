@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { BoltIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, FlagIcon } from '@heroicons/react/24/solid'
 
-export function Power(props: {
-  power: number | null
-  onUpdate: (power: number | null) => void
+export function Priority(props: {
+  priority: number | null
+  onUpdate: (priority: number | null) => void
 }) {
-  const { power, onUpdate } = props
+  const { priority, onUpdate } = props
   const [editing, setEditing] = useState(false)
-  const [value, setValue] = useState(power)
+  const [value, setValue] = useState(priority)
 
   useEffect(() => {
-    if (!editing && power != value) onUpdate(value)
+    if (!editing && priority != value) onUpdate(value)
   }, [editing])
 
   return (
     <div className="text-xs flex">
-      <BoltIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
-      Power limit
+      <FlagIcon className="inline-block mr-2 w-4 h-4 text-red-400" />
+      Priority
       <div className="flex-1" />
       <div className="text-gray-500">
         {!editing && (
           <>
             <a
-              className="w-24 flex border-b-[1px] border-transparent"
+              className="w-32 flex border-b-[1px] border-transparent"
               href="#"
               onClick={(e) => {
                 e.preventDefault()
                 setEditing(!editing)
               }}
             >
-              {value === null ? 'No limit' : `${value} W`}
+              {value === null ? 'None' : value}
               <span className="flex-1" />
               <ChevronDownIcon className="w-4 h-4" />
             </a>
@@ -38,7 +38,7 @@ export function Power(props: {
         {editing && (
           <>
             <input
-              className="w-16 p-0 pr-2 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
+              className="w-8 p-0 pr-2 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
               type="number"
               value={value ?? ''}
               onChange={(e) => {
@@ -51,7 +51,6 @@ export function Power(props: {
               }}
               autoFocus
             />
-            W
           </>
         )}
       </div>

@@ -61,6 +61,15 @@ pnpm run dev
 The application is now available at [http://localhost:5173](http://localhost:5173).
 Log in with `admin` / `password`.
 
+Easily reseed the database with the following commands:
+
+```
+docker compose exec postgres dropdb -U postgres zapp_development
+docker compose exec postgres createdb -U postgres zapp_development
+docker compose run --rm app python manage.py migrate
+docker compose run --rm app python manage.py loaddata app/fixtures.json app/users/fixtures.json app/infrastructure/fixtures.json app/schedule/fixtures.json
+```
+
 ## License
 
 Copyright 2024 Florian Dejonckheere, Otto Heldt, Joni Rajamäki

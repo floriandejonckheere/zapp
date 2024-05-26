@@ -7,6 +7,10 @@ import Spinner from '@/components/spinner'
 
 import ScheduleCard from '@/components/schedule/schedule_card'
 import PredictionCard from '@/components/schedule/prediction_card'
+import FlowCard from '@/components/schedule/flow_card'
+import LoadCard from '@/components/schedule/load_card'
+
+import { TODAY } from '@/types'
 
 export default function Schedule(): ReactElement {
   const { home } = useHome()
@@ -23,6 +27,8 @@ export default function Schedule(): ReactElement {
     <>
       <PredictionCard home={home} date={date} />
       <ScheduleCard home={home} date={date} />
+      {date === TODAY && <FlowCard home={home} date={date} />}
+      {date === TODAY && <LoadCard home={home} date={date} />}
     </>
   )
 }

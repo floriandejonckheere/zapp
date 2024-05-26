@@ -10,12 +10,12 @@ export function Source(props: {
 
   return (
     <div className="text-xs flex">
-      <FireIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+      <FireIcon className="inline-block mr-2 w-4 h-4 text-red-400" />
       Power source
       <div className="flex-1" />
       <select
         value={value || ''}
-        className="w-20 border-0 p-0 text-xs text-gray-500 bg-none focus:ring-0"
+        className="w-28 border-0 p-0 text-xs text-gray-500 bg-none focus:ring-0"
         onChange={(e) => {
           const value = e.target.value === '' ? null : e.target.value
 

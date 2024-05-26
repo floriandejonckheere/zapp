@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { Time } from '@/components/home/constraints/time'
-import { Price } from '@/components/home/constraints/price'
-import { Source } from '@/components/home/constraints/source'
-import { Power } from '@/components/home/constraints/power'
+import { Priority } from '@/components/infrastructure/constraints/priority'
+import { Time } from '@/components/infrastructure/constraints/time'
+import { Price } from '@/components/infrastructure/constraints/price'
+import { Source } from '@/components/infrastructure/constraints/source'
+import { Power } from '@/components/infrastructure/constraints/power'
 
 import { Device, UpdateDevice } from '@/types'
 
@@ -31,6 +32,13 @@ export default function Consumer(props: {
           {(device.power || device.capacity) && ')'}
         </div>
       </div>
+
+      <Priority
+        priority={device.priority}
+        onUpdate={(priority) => {
+          onUpdate({ priority })
+        }}
+      />
 
       <Time
         start={device.startTimeIn}

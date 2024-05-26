@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { ChevronDownIcon, CurrencyEuroIcon } from '@heroicons/react/24/solid'
+import { ChevronDownIcon, ClockIcon } from '@heroicons/react/24/solid'
 
-export function Price(props: {
+export function Time(props: {
   start: number | null
   stop: number | null
   onUpdate: (start: number | null, stop: number | null) => void
@@ -18,14 +18,14 @@ export function Price(props: {
 
   return (
     <div className="text-xs flex">
-      <CurrencyEuroIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
-      Price limit
+      <ClockIcon className="inline-block mr-2 w-4 h-4 text-sky-700" />
+      Time limit
       <div className="flex-1" />
       <div className="text-gray-500">
         {!editing && (
           <>
             <a
-              className="w-24 flex border-b-[1px] border-transparent"
+              className="w-32 flex border-b-[1px] border-transparent"
               href="#"
               onClick={(e) => {
                 e.preventDefault()
@@ -34,10 +34,10 @@ export function Price(props: {
             >
               {startValue == null && stopValue == null && 'No limit'}
               {startValue != null && stopValue == null && 'From '}
-              {startValue == null && stopValue != null && 'Up to '}
+              {startValue == null && stopValue != null && 'Until '}
               {[startValue, stopValue]
                 .filter((x) => x != null)
-                .map((x) => `${x} c€`.padStart(4, '0'))
+                .map((x) => `${x}:00`.padStart(5, '0'))
                 .join(' - ')}
               <span className="flex-1" />
               <ChevronDownIcon className="w-4 h-4" />
@@ -47,35 +47,39 @@ export function Price(props: {
         {editing && (
           <>
             <input
-              className="w-8 p-0 pr-1 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
+              className="w-4 p-0 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
               type="number"
+              min="0"
+              max="24"
               value={startValue ?? ''}
               onChange={(e) => {
                 const value = e.target.value
 
                 value === ''
                   ? setStartValue(null)
-                  : setStartValue(parseInt(value))
+                  : setStartValue(Math.min(24, Math.max(0, parseInt(value))))
               }}
               autoFocus
             />
-            c€{' - '}
+            :00{' - '}
             <input
-              className="w-8 p-0 pr-1 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
+              className="w-4 p-0 border-0 border-b-[1px] border-gray-500 focus:ring-0 text-xs text-right"
               type="number"
+              min="0"
+              max="24"
               value={stopValue ?? ''}
               onChange={(e) => {
                 const value = e.target.value
 
                 value === ''
                   ? setStopValue(null)
-                  : setStopValue(parseInt(value))
+                  : setStopValue(Math.min(24, Math.max(0, parseInt(value))))
               }}
               onBlur={() => {
                 setEditing(false)
               }}
             />
-            c€
+            :00
           </>
         )}
       </div>

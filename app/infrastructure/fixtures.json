@@ -5,8 +5,8 @@
     "fields": {
       "name": "Turku AMK",
       "address": "Joukahaisenkatu 3, 20520 Turku",
-      "created_at": "2024-05-15T17:22:20.723Z",
-      "updated_at": "2024-05-15T17:22:20.723Z",
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z",
       "users": [
         1
       ]
@@ -17,24 +17,25 @@
     "pk": 1,
     "fields": {
       "home": 1,
-      "name": "House",
-      "device_type": "CO",
+      "name": "Grid",
+      "device_type": "GR",
+      "priority": null,
       "power": null,
       "capacity": null,
       "start_time_in": null,
       "stop_time_in": null,
       "start_time_out": null,
       "stop_time_out": null,
-      "start_price_in": null,
+      "start_price_in": 15.0,
       "stop_price_in": null,
       "start_price_out": null,
-      "stop_price_out": null,
+      "stop_price_out": 5.0,
       "source_in": null,
       "source_out": null,
       "power_in": null,
       "power_out": null,
-      "created_at": "2024-05-15T17:23:41.218Z",
-      "updated_at": "2024-05-15T17:26:25.466Z"
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z"
     }
   },
   {
@@ -42,33 +43,9 @@
     "pk": 2,
     "fields": {
       "home": 1,
-      "name": "Grid",
-      "device_type": "GR",
-      "power": null,
-      "capacity": null,
-      "start_time_in": null,
-      "stop_time_in": null,
-      "start_time_out": null,
-      "stop_time_out": null,
-      "start_price_in": null,
-      "stop_price_in": null,
-      "start_price_out": null,
-      "stop_price_out": null,
-      "source_in": null,
-      "source_out": null,
-      "power_in": null,
-      "power_out": null,
-      "created_at": "2024-05-15T17:26:42.028Z",
-      "updated_at": "2024-05-15T17:26:42.028Z"
-    }
-  },
-  {
-    "model": "infrastructure.device",
-    "pk": 3,
-    "fields": {
-      "home": 1,
-      "name": "Solar panel",
+      "name": "PV",
       "device_type": "PR",
+      "priority": null,
       "power": 5000,
       "capacity": null,
       "start_time_in": null,
@@ -77,14 +54,40 @@
       "stop_time_out": null,
       "start_price_in": null,
       "stop_price_in": null,
-      "start_price_out": null,
+      "start_price_out": 5.0,
       "stop_price_out": null,
       "source_in": null,
       "source_out": null,
       "power_in": null,
       "power_out": null,
-      "created_at": "2024-05-15T17:26:59.478Z",
-      "updated_at": "2024-05-15T17:26:59.478Z"
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z"
+    }
+  },
+  {
+    "model": "infrastructure.device",
+    "pk": 3,
+    "fields": {
+      "home": 1,
+      "name": "Battery",
+      "device_type": "ST",
+      "priority": null,
+      "power": null,
+      "capacity": 15000,
+      "start_time_in": 6,
+      "stop_time_in": 18,
+      "start_time_out": null,
+      "stop_time_out": null,
+      "start_price_in": null,
+      "stop_price_in": 5.0,
+      "start_price_out": 10.0,
+      "stop_price_out": null,
+      "source_in": null,
+      "source_out": null,
+      "power_in": null,
+      "power_out": null,
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z"
     }
   },
   {
@@ -92,37 +95,13 @@
     "pk": 4,
     "fields": {
       "home": 1,
-      "name": "Battery",
-      "device_type": "ST",
-      "power": null,
-      "capacity": 15000,
-      "start_time_in": null,
-      "stop_time_in": null,
-      "start_time_out": null,
-      "stop_time_out": null,
-      "start_price_in": null,
-      "stop_price_in": null,
-      "start_price_out": null,
-      "stop_price_out": null,
-      "source_in": null,
-      "source_out": null,
-      "power_in": null,
-      "power_out": null,
-      "created_at": "2024-05-15T17:27:12.989Z",
-      "updated_at": "2024-05-15T17:27:12.989Z"
-    }
-  },
-  {
-    "model": "infrastructure.device",
-    "pk": 5,
-    "fields": {
-      "home": 1,
-      "name": "Electric Vehicle",
+      "name": "EV",
       "device_type": "CO",
+      "priority": 1,
       "power": 7200,
       "capacity": 40000,
-      "start_time_in": 22,
-      "stop_time_in": 6,
+      "start_time_in": 20,
+      "stop_time_in": 5,
       "start_time_out": null,
       "stop_time_out": null,
       "start_price_in": null,
@@ -131,35 +110,36 @@
       "stop_price_out": null,
       "source_in": "SO",
       "source_out": null,
-      "power_in": null,
+      "power_in": 3000,
       "power_out": null,
-      "created_at": "2024-05-15T17:27:27.360Z",
-      "updated_at": "2024-05-15T17:27:27.360Z"
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z"
     }
   },
   {
     "model": "infrastructure.device",
-    "pk": 6,
+    "pk": 5,
     "fields": {
       "home": 1,
       "name": "HVAC",
       "device_type": "CO",
+      "priority": null,
       "power": 3000,
       "capacity": null,
-      "start_time_in": null,
-      "stop_time_in": null,
+      "start_time_in": 12,
+      "stop_time_in": 19,
       "start_time_out": null,
       "stop_time_out": null,
       "start_price_in": null,
       "stop_price_in": null,
       "start_price_out": null,
       "stop_price_out": null,
-      "source_in": null,
+      "source_in": "BA",
       "source_out": null,
-      "power_in": null,
+      "power_in": 1000,
       "power_out": null,
-      "created_at": "2024-05-15T17:27:44.071Z",
-      "updated_at": "2024-05-15T17:27:44.071Z"
+      "created_at": "2024-01-01T00:00:00.000Z",
+      "updated_at": "2024-01-01T00:00:00.000Z"
     }
   }
 ]

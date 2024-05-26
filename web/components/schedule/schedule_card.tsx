@@ -1,16 +1,55 @@
 import React, { ReactElement } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import {
-  Battery100Icon,
-  BoltIcon,
-  CpuChipIcon,
-  SunIcon
-} from '@heroicons/react/24/solid'
 
 import { dateTypeToAPIString } from '@/utils'
-import { DateType, Home } from '@/types'
+import { DateType, Home, ScheduleElement } from '@/types'
 
 import { getSchedules } from '@/api/schedule'
+import ScheduleChart from '@/components/charts/schedule'
+
+function getPowerRanges(
+  arr: number[],
+  targetValue: number
+): Array<[number, number]> {
+  const ranges: Array<[number, number]> = []
+  let start: number | null = null
+
+  arr.forEach((val, i) => {
+    if (val === targetValue) {
+      if (start === null) {
+        start = i
+      }
+      if (i === arr.length - 1 || arr[i + 1] !== targetValue) {
+        ranges.push([start, i + 1])
+        start = null
+      }
+    }
+  })
+
+  return ranges
+}
+
+function extractPowerRanges(
+  date: DateType,
+  element: ScheduleElement,
+  targetValue: number
+) {
+  return getPowerRanges(element.power, targetValue).map(([start, end]) => {
+    return {
+      x: element.device.name,
+      y: [
+        new Date(
+          `${dateTypeToAPIString(date)}T${start.toString().padStart(2, '0')}:00`
+        ).getTime() +
+          3 * 3600 * 1000, // TODO: fix timezones
+        new Date(
+          `${dateTypeToAPIString(date)}T${end.toString().padStart(2, '0')}:00`
+        ).getTime() +
+          3 * 3600 * 1000 // TODO: fix timezones
+      ]
+    }
+  })
+}
 
 export default function ScheduleCard(props: {
   home: Home
@@ -24,57 +63,105 @@ export default function ScheduleCard(props: {
     enabled: !!home
   })
 
-  const deviceTypeToIcon = (deviceType: string) => {
-    if (deviceType === 'CO') {
-      // Consumer
-      return <CpuChipIcon className="inline-block mr-2 w-3 h-3 text-sky-700" />
-    } else if (deviceType === 'PR') {
-      // Producer
-      return <SunIcon className="inline-block mr-2 w-3 h-3 text-yellow-400" />
-    } else if (deviceType === 'ST') {
-      // Storage
-      return (
-        <Battery100Icon className="inline-block mr-2 w-3 h-3 text-green-400" />
-      )
-    } else {
-      return <BoltIcon className="inline-block mr-2 w-3 h-3 text-sky-700" />
-    }
-  }
-
   if (!isSuccess)
     return (
       <div className="text-white text-center font-bold">An error occurred.</div>
     )
   if (data.length === 0)
     return (
-      <div className="text-white text-center font-bold">
+      <div className="text-white text-center text-sm">
         No schedule found for {date}.
       </div>
     )
 
+  const scheduleDataByPower = [
+    {
+      name: 'Consuming energy',
+      color: '#fb7185',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'CO')
+          .map((element) => extractPowerRanges(date, element, 1))
+          .flat()
+      ].flat()
+    },
+    {
+      name: 'Producing energy',
+      color: '#fbbf24',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'PR')
+          .map((element) => extractPowerRanges(date, element, -1))
+          .flat()
+      ].flat()
+    },
+    {
+      name: 'Charging',
+      color: '#fb7185',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'ST')
+          .map((element) => extractPowerRanges(date, element, 1))
+          .flat()
+      ].flat()
+    },
+    {
+      name: 'Discharging',
+      color: '#4ade80',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'ST')
+          .map((element) => extractPowerRanges(date, element, -1))
+          .flat()
+      ].flat()
+    },
+    {
+      name: 'Exporting energy',
+      color: '#4f46e5',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'GR')
+          .map((element) => extractPowerRanges(date, element, 1))
+          .flat()
+      ].flat()
+    },
+    {
+      name: 'Importing energy',
+      color: '#818cf8',
+      data: [
+        data[0].elements
+          .filter((element) => element.device.deviceType === 'GR')
+          .map((element) => extractPowerRanges(date, element, -1))
+          .flat()
+      ].flat()
+    }
+  ]
+
   return (
-    <div className="w-full p-6 bg-white rounded-2xl shadow-md flex flex-col gap-6">
-      {data[0].elements
-        .filter((element) => element.device.deviceType != 'GR')
-        .map((element) => (
-          <div key={element.id} className="flex flex-col">
-            <div className="flex items-baseline">
-              {deviceTypeToIcon(element.device.deviceType)}
-              <div className="font-medium text-sm">{element.device.name}</div>
-            </div>
-            <div className="w-full flex gap-0.5">
-              {element.power.map((power, index) => (
-                <div
-                  key={index}
-                  className={`w-[4%] h-5 text-xs  text-center ${power > 0 ? 'bg-green-400' : power < 0 ? 'bg-red-400' : 'bg-gray-400'}`}
-                >
-                  {/* TODO: remove for final version */}
-                  {power}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+    <div className="w-full py-6 bg-white rounded-2xl shadow-md flex flex-col">
+      <div className="px-6 text-sm font-medium">Smart energy schedule</div>
+      <ScheduleChart
+        categories={new Array(24)
+          .fill('')
+          .map((_, i) => `${i}:00`.padStart(5, '0'))}
+        series={scheduleDataByPower}
+        annotations={{
+          xaxis: [
+            {
+              x: new Date().getTime() + 3 * 3600 * 1000, // TODO: fix timezones
+              borderColor: '#fb7185'
+            }
+          ]
+        }}
+        min={
+          new Date(`${dateTypeToAPIString(date)}T00:00:00`).getTime() +
+          3 * 3600 * 1000
+        } // TODO: fix timezones
+        max={
+          new Date(`${dateTypeToAPIString(date)}T23:59:59`).getTime() +
+          3 * 3600 * 1000
+        } // TODO: fix timezones
+      />
     </div>
   )
 }

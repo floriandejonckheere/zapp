@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from app.infrastructure import constraints
+
 
 class Home(models.Model):
     # Primary key
@@ -48,7 +50,7 @@ class Device(models.Model):
     device_type = models.CharField(max_length=2, choices=DeviceType.choices, default=DeviceType.CONSUMER)
 
     # Priority
-    priority = models.IntegerField(default=0)
+    priority = models.IntegerField(null=True, blank=True)
 
     # Power (W)
     power = models.IntegerField(null=True, blank=True)
@@ -83,6 +85,74 @@ class Device(models.Model):
     # Timestamps
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Calculate power within a context
+    def power_in_context(self, context):
+        if self.device_type == Device.DeviceType.CONSUMER:
+            # Consumers only consume energy
+            power_in = 1
+
+            # Check time constraint
+            power_in *= constraints.check_time(self.start_time_in, self.stop_time_in, context.hour)
+
+            # Check price constraint
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+
+            # Check source constraint
+            # TODO
+
+            # Check power constraint
+            # TODO
+
+            # Return power
+            return power_in
+        elif self.device_type == Device.DeviceType.PRODUCER:
+            # Producers only produce energy
+            power_out = -1
+
+            # Check time constraint
+            power_out *= constraints.check_time(self.start_time_out, self.stop_time_out, context.hour)
+
+            # Check price constraint
+            power_out *= constraints.check_price(self.start_price_out, self.stop_price_out, context.price)
+
+            # Check source constraint
+            # TODO
+
+            # Check power constraint
+            # TODO
+
+            # Return power
+            return power_out
+        elif self.device_type == Device.DeviceType.STORAGE:
+            # Storage can both consume and produce energy
+            power_in = 1
+            power_out = -1
+
+            # Check time constraint (in and out)
+            power_in *= constraints.check_time(self.start_time_in, self.stop_time_in, context.hour)
+            power_out *= constraints.check_time(self.start_time_out, self.stop_time_out, context.hour)
+
+            # Check price constraint (in and out)
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+            power_out *= constraints.check_price(self.start_price_out, self.stop_price_out, context.price)
+
+            # Check power constraint (in only)
+            # TODO
+
+            # Return power
+            return power_in + power_out
+        elif self.device_type == Device.DeviceType.GRID:
+            # Grid can both consume and produce energy
+            power_in = 1
+            power_out = -1
+
+            # Check price constraint (in and out)
+            power_in *= constraints.check_price(self.start_price_in, self.stop_price_in, context.price)
+            power_out *= constraints.check_price(self.start_price_out, self.stop_price_out, context.price)
+
+            # Return power
+            return power_in + power_out
 
     def __str__(self):
         return self.name

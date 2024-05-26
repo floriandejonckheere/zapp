@@ -3,7 +3,7 @@ import React from 'react'
 import { Device, UpdateDevice } from '@/types'
 
 import { deviceTypeToIcon } from './_shared'
-import { Price } from '@/components/home/constraints/price'
+import { Price } from '@/components/infrastructure/constraints/price'
 
 export default function Grid(props: {
   device: Device

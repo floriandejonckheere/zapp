@@ -2,12 +2,11 @@ import React from 'react'
 
 import { Device, UpdateDevice } from '@/types'
 
-import { Time } from '@/components/home/constraints/time'
+import { Time } from '@/components/infrastructure/constraints/time'
 
 import { deviceTypeToIcon } from './_shared'
-import { Price } from '@/components/home/constraints/price'
-import { Source } from '@/components/home/constraints/source'
-import { Power } from '@/components/home/constraints/power'
+import { Price } from '@/components/infrastructure/constraints/price'
+import { Power } from '@/components/infrastructure/constraints/power'
 
 export default function Producer(props: {
   device: Device
@@ -44,12 +43,6 @@ export default function Producer(props: {
         stop={device.stopPriceOut}
         onUpdate={(start, stop) => {
           onUpdate({ startPriceOut: start, stopPriceOut: stop })
-        }}
-      />
-      <Source
-        source={device.sourceOut}
-        onUpdate={(source) => {
-          onUpdate({ sourceOut: source })
         }}
       />
       <Power
