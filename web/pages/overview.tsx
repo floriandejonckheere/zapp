@@ -1,13 +1,68 @@
+import { getDevices } from '@/api/infrastructure'
+import { getSchedules } from '@/api/schedule'
+import Spinner from '@/components/spinner'
+import { useDate } from '@/contexts/date'
+import { useHome } from '@/contexts/home'
+import { dateTypeToAPIString } from '@/utils'
+import { BoltIcon as OutlineBoltIcon } from '@heroicons/react/24/outline'
+import {
+  Battery100Icon,
+  BoltIcon as SolidBoltIcon,
+  SunIcon
+} from '@heroicons/react/24/solid'
+import { useQuery } from '@tanstack/react-query'
 import { ReactElement } from 'react'
 import { BsFillPlugFill } from 'react-icons/bs'
-import { GiBatteryPack } from 'react-icons/gi'
-import { ImPower } from 'react-icons/im'
 import { LuUtilityPole } from 'react-icons/lu'
-import { PiHouseLineFill, PiSolarPanelFill } from 'react-icons/pi'
+import { PiHouseLineFill } from 'react-icons/pi'
+import { TiWeatherPartlySunny } from 'react-icons/ti'
 
 export default function Overview(): ReactElement {
+  const { home } = useHome()
+  const { date } = useDate()
+  const { isSuccess, data } = useQuery({
+    queryKey: ['devices', home?.id],
+    queryFn: () => getDevices(home!.id),
+    enabled: !!home
+  })
+
+  if (!home) {
+    return (
+      <div className="h-full w-full flex justify-center">
+        <Spinner color="text-white" />
+      </div>
+    )
+  }
+
+  if (!isSuccess) {
+    return (
+      <div className="text-white text-center font-bold">An error occurred.</div>
+    )
+  }
+
+  console.log(data)
   return (
-    <div className="h-full rounded-md w-full bg-neutral-800 flex items-center justify-center">
+    <div className="h-full rounded-md w-full bg-neutral-800 flex items-center justify-center flex-col">
+      <div className="h-20 w-72 flex flex-row justify-evenly pt-4">
+        <div className="bg-gray-300 rounded-lg h-12 w-28 flex flex-row items-center justify-evenly">
+          <div className="rounded-full h-10 w-10 flex items-center justify-center bg-red-800">
+            <OutlineBoltIcon className="w-5 text-gray-300" />
+          </div>
+          <div className="flex flex-col text-sm">
+            <div>Price</div>
+            <div className="text-gray-500">€/kWh</div>
+          </div>
+        </div>
+        <div className="bg-gray-300 rounded-lg h-12 w-28 flex flex-row items-center justify-evenly">
+          <div className=" flex items-center  justify-center ">
+            <TiWeatherPartlySunny className=" h-10 w-10 text-gray-300" />
+          </div>
+          <div className="flex flex-col text-sm">
+            <div>Temp</div>
+            <div className="text-gray-500">°C</div>
+          </div>
+        </div>
+      </div>
       <div className="relative w-72 h-96">
         {/* Grid */}
         <div className="absolute flex flex-col items-center top-2 left-1/2 transform -translate-x-1/2 text-center text-gray-300 z-10 bg-neutral-800">
@@ -23,7 +78,7 @@ export default function Overview(): ReactElement {
           <div className=" text-gray-300">100 W</div>
           <div className=" text-gray-500">Rest</div>
           <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800">
-            <ImPower className="text-gray-300" />
+            <SolidBoltIcon className="w-5 text-gray-300" />
           </div>
         </div>
 
@@ -32,7 +87,7 @@ export default function Overview(): ReactElement {
           <div className=" text-gray-300">2.3 kW</div>
           <div className=" text-gray-500">PV</div>
           <div className="border-2 border-green-500 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800">
-            <PiSolarPanelFill className="text-gray-300" />
+            <SunIcon className="w-5 text-gray-300" />
           </div>
         </div>
 
@@ -41,7 +96,7 @@ export default function Overview(): ReactElement {
           <div className=" text-gray-300">1.2 kW</div>
           <div className=" text-gray-500">Battery</div>
           <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800">
-            <GiBatteryPack className="text-gray-300" />
+            <Battery100Icon className="w-5 text-gray-300" />
           </div>
         </div>
 
