@@ -1,6 +1,6 @@
-import React, { ReactElement, useEffect } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { useQuery } from '@tanstack/react-query'
+import React, { ReactElement, useEffect } from 'react'
 
 import { getHomes } from '@/api/infrastructure'
 
@@ -19,7 +19,7 @@ export default function HomeSelector(): ReactElement {
   }, [data, isSuccess])
 
   return (
-    <div className="w-full hs-dropdown relative inline-flex">
+    <div className="w-full hs-dropdown relative inline-flex z-20">
       <button
         id="hs-dropdown-home"
         type="button"
