@@ -121,12 +121,9 @@ export default function Overview(): ReactElement {
   }
 
   const gridColorClass = extractColorClassGrid('GR')
-  console.log(`Grid color class: ${gridColorClass}`)
   const pvColorClass = extractColorClass('PR')
   const batteryColorClass = extractColorClass('ST')
   const wallboxColorClass = extractColorClass('EV')
-
-  console.log(scheduleData)
 
   const currentPrice = predictionData[0]?.price?.[currentHour - 1] ?? 'N/A'
   const currentProduction =
