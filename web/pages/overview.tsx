@@ -38,6 +38,7 @@ export default function Overview(): ReactElement {
     isError: isScheduleError
   } = useQuery({
     queryKey: ['schedules', home?.id, date],
+    // @ts-expect-error error
     queryFn: () => getSchedules(home.id, dateTypeToAPIString(date)),
     enabled: !!home
   })
