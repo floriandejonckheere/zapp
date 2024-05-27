@@ -6,6 +6,19 @@ Zapp is a smart energy assistant for the RESPONSE2020 Energy Management System (
 
 Navigate to [https://zapp.dejonckhee.re](https://zapp.dejonckhee.re) to access the application.
 
+<p align="center" width="100%">
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/1-signin.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/1-signin.png" width="24%" height="auto"></a>
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/2-signup.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/2-signup.png" width="24%" height="auto"></a>
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/3-overview.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/3-overview.png" width="24%" height="auto"></a>
+</p>
+
+<p align="center" width="100%">
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/4-schedule.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/4-schedule.png" width="24%" height="auto"></a>
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/5-schedule.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/5-schedule.png" width="24%" height="auto"></a>
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/6-infrastructure.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/6-infrastructure.png" width="24%" height="auto"></a>
+    <a href="https://github.com/floriandejonckheere/zapp/raw/master/7-infrastructure.png"><img src="https://github.com/floriandejonckheere/zapp/raw/master/7-infrastructure.png" width="24%" height="auto"></a>
+</p>
+
 ## Development
 
 Start the database container:
