@@ -3,9 +3,9 @@ import Spinner from '@/components/spinner'
 import { useDate } from '@/contexts/date'
 import { useHome } from '@/contexts/home'
 import { dateTypeToAPIString } from '@/utils'
-import { BoltIcon as OutlineBoltIcon } from '@heroicons/react/24/outline'
 import {
   Battery100Icon,
+  BoltIcon,
   BoltIcon as SolidBoltIcon,
   SunIcon
 } from '@heroicons/react/24/solid'
@@ -130,118 +130,118 @@ export default function Overview(): ReactElement {
   const currentProduction =
     (predictionData[0]?.production?.[currentHour - 1] ?? 0) / 1000
   return (
-    <div className="h-full rounded-md w-full bg-neutral-800 flex items-center justify-center flex-col">
+    <div className="h-full w-full bg-white rounded-2xl shadow-md flex items-center justify-center flex-col">
       <div className="flex flex-row justify-evenly w-72 text-sm pt-2">
         <div>Spot price</div>
         <div>Temperature</div>
       </div>
       <div className="h-20 w-72 flex flex-row justify-evenly pt-2">
-        <div className="bg-gray-300 rounded-lg h-12 w-28 flex flex-row items-center justify-evenly">
-          <div className="rounded-full h-10 w-10 flex items-center justify-center bg-red-800">
-            <OutlineBoltIcon className="w-5 text-gray-300" />
+        <div className="bg-gray-200 shadow-md rounded-lg h-14 w-28 flex flex-row items-center justify-evenly">
+          <div className="rounded-full h-10 w-10 flex items-center justify-center bg-yellow-500">
+            <BoltIcon className="w-5 text-gray-500" />
           </div>
           <div className="flex flex-col text-sm">
             <div>{currentPrice}</div>
-            <div className="text-gray-500">c€/kWh</div>
+            <div className="text-gray-700">c€/kWh</div>
           </div>
         </div>
-        <div className="bg-gray-300 rounded-lg h-12 w-28 flex flex-row items-center justify-evenly">
+        <div className="bg-gray-200 shadow-md rounded-lg h-14 w-28 flex flex-row items-center justify-evenly">
           <div className=" flex items-center  justify-center ">
-            <TiWeatherPartlySunny className=" h-10 w-10 text-gray-300" />
+            <TiWeatherPartlySunny className=" h-10 w-10 text-sky-700" />
           </div>
-          <div className="flex flex-col text-sm">
-            <div>23</div>
-            <div className="text-gray-500">°C</div>
+          <div className="flex flex-row text-sm">
+            <div>19</div>
+            <div className="pl-1 text-gray-400">°C</div>
           </div>
         </div>
       </div>
       <div className="relative w-72 h-96">
         {/* Grid */}
-        <div className="absolute flex flex-col items-center top-2 left-1/2 transform -translate-x-1/2 text-center text-gray-300 z-10 bg-neutral-800">
-          <div className=" text-gray-300">150 W</div>
-          <div className=" text-gray-500">Grid</div>
+        <div className="absolute flex flex-col items-center top-2 left-1/2 transform -translate-x-1/2 text-center text-gray-800 z-10">
+          <div className=" text-gray-500">150 W</div>
+          <div className=" text-gray-700">Grid</div>
           <div
             style={{ borderColor: gridColorClass }}
-            className={`border-2 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800`}
+            className={`border-2 rounded-full h-10 w-10 flex items-center justify-center bg-white`}
           >
-            <LuUtilityPole className="text-gray-300" />
+            <LuUtilityPole className="text-gray-500" />
           </div>
         </div>
 
         {/* Rest */}
         <div className="absolute flex flex-col items-center top-14 text-center text-yellow-500 z-10">
-          <div className=" text-gray-300">100 W</div>
-          <div className=" text-gray-500">Rest</div>
-          <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800">
-            <SolidBoltIcon className="w-5 text-gray-300" />
+          <div className=" text-gray-500">100 W</div>
+          <div className=" text-gray-700">HVAC</div>
+          <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-white">
+            <SolidBoltIcon className="w-5 text-gray-500" />
           </div>
         </div>
 
         {/* PV */}
-        <div className="absolute flex flex-col items-center top-14 right-2 text-center text-green-500 z-10">
-          <div className=" text-gray-300">{currentProduction} kW</div>
-          <div className=" text-gray-500">PV</div>
+        <div className="absolute flex flex-col items-center top-14 right-2 text-center text-green-400 z-10">
+          <div className=" text-gray-500">{currentProduction} kW</div>
+          <div className=" text-gray-700">PV</div>
           <div
             style={{ borderColor: pvColorClass }}
-            className={`border-2 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800`}
+            className={`border-2 rounded-full h-10 w-10 flex items-center justify-center bg-white`}
           >
-            <SunIcon className="w-5 text-gray-300" />
+            <SunIcon className="w-5 text-gray-500" />
           </div>
         </div>
 
         {/* Battery */}
         <div className="absolute flex flex-col items-center bottom-12 right-2 text-center text-yellow-500 z-10">
           <div
-            className={`border-2 border${batteryColorClass} rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800`}
+            className={`border-2 border${batteryColorClass} rounded-full h-10 w-10 flex items-center justify-center bg-white`}
             style={{ borderColor: batteryColorClass }}
           >
-            <Battery100Icon className="w-5 text-gray-300" />
+            <Battery100Icon className="w-5 text-gray-500" />
           </div>
-          <div className=" text-gray-500">Battery</div>
-          <div className=" text-gray-300">1.2 kW</div>
+          <div className=" text-gray-700">Battery</div>
+          <div className=" text-gray-500">1.2 kW</div>
         </div>
 
         {/* Wallbox */}
-        <div className="absolute flex flex-col items-center bottom-2 left-1/2 transform -translate-x-1/2 text-center text-gray-300 z-10">
+        <div className="absolute flex flex-col items-center bottom-2 left-1/2 transform -translate-x-1/2 text-center text-gray-500 z-10">
           <div
             style={{ borderColor: wallboxColorClass }}
-            className={`border-2 border${wallboxColorClass} rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800`}
+            className={`border-2 border${wallboxColorClass} rounded-full h-10 w-10 flex items-center justify-center bg-white`}
           >
-            <BsFillPlugFill className="text-gray-300" />
+            <BsFillPlugFill className="text-gray-500" />
           </div>
-          <div className=" text-gray-500">Wallbox</div>
-          <div className=" text-gray-300">0 W</div>
+          <div className=" text-gray-700">EV</div>
+          <div className=" text-gray-500">0 W</div>
         </div>
 
         {/* House */}
         <div className="absolute flex flex-col items-center bottom-12  text-center text-yellow-500 z-10">
-          <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-neutral-800">
-            <PiHouseLineFill className="text-gray-300" />
+          <div className="border-2 border-yellow-500 rounded-full h-10 w-10 flex items-center justify-center bg-white">
+            <PiHouseLineFill className="text-gray-500" />
           </div>
-          <div className=" text-gray-500">House</div>
-          <div className=" text-gray-300">100 W</div>
+          <div className=" text-gray-700">House</div>
+          <div className=" text-gray-500">100 W</div>
         </div>
 
         {/* Central Node */}
-        <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-300 rounded-full"></div>
+        <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-gray-500 rounded-full"></div>
 
         {/* Connecting Lines */}
         <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
           {/* Vertical Line */}
           <div
             style={{ backgroundColor: gridColorClass }}
-            className={`absolute top-0 left-1/2 w-0.5 h-28 mt-20 bg-gray-300 `}
+            className={`absolute top-0 left-1/2 w-0.5 h-28 mt-20 bg-gray-500 `}
           ></div>
           <div
             style={{ backgroundColor: wallboxColorClass }}
-            className="absolute bottom-0 left-1/2 w-0.5 h-28 mb-20 bg-gray-300"
+            className="absolute bottom-0 left-1/2 w-0.5 h-28 mb-20 bg-gray-500"
           ></div>
 
           {/* Diagonal Lines */}
           <div className="absolute w-full h-full">
             {/* Top-Right to Center */}
             <div
-              className="absolute w-0.5 h-1/3 bg-gray-300 transform"
+              className="absolute w-0.5 h-1/3 bg-gray-500 transform"
               style={{
                 transform: 'rotate(60deg)',
                 transformOrigin: 'bottom left',
@@ -262,7 +262,7 @@ export default function Overview(): ReactElement {
             ></div>
             {/* Bottom-Right to Center */}
             <div
-              className="absolute w-0.5 h-1/3 bg-gray-300 transform"
+              className="absolute w-0.5 h-1/3 bg-gray-500 transform"
               style={{
                 transform: 'rotate(-60deg)',
                 transformOrigin: 'top left',
