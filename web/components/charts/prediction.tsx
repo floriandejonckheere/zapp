@@ -7,6 +7,7 @@ import { useTheme } from '@/contexts/theme'
 interface PredictionChartProps {
   categories: string[]
   series: ApexAxisChartSeries
+  annotations: ApexAnnotations
   options?: ApexOptions
 }
 
@@ -86,6 +87,7 @@ export default function PredictionChart(
       }
     ],
     series: props.series,
+    annotations: props.annotations,
     ...props.options
   })
 
