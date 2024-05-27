@@ -48,6 +48,14 @@ export default function PredictionCard(props: { home: Home; date: DateType }) {
             data: data[0].price
           }
         ]}
+        annotations={{
+          xaxis: [
+            {
+              x: `${new Date().getHours()}:00`.padStart(5, '0'),
+              borderColor: '#fb7185'
+            }
+          ]
+        }}
       />
     </div>
   )
